@@ -38,12 +38,14 @@ Get all tags matching the tag specified from the tags file at the path.
 
 #### Example
 
-```coffeescript
-ctags = require 'ctags'
+```js
+const ctags = require('ctags');
 
-ctags.findTags('/Users/me/repos/node/tags', 'exists', (error, tags=[]) ->
-  for tag in tags
-    console.log("#{tag.name} is in #{tag.file}")
+ctags.findTags('/Users/me/repos/node/tags', 'exists', (error, tags=[]) => {
+  for (tag of tags) {
+    console.log(`${tag.name} is in ${tag.file}`);
+  }
+});
 ```
 
 ### createReadStream(tagsFilePath, [options])
@@ -67,11 +69,13 @@ An `end` event will be emitted when all the tags have been read.
 Returns a stream.
 #### Example
 
-```coffeescript
-ctags = require 'ctags'
+```js
+const ctags = require('ctags');
 
-stream = ctags.createReadStream('/Users/me/repos/node/tags')
-stream.on 'data', (tags) ->
-  for tag in tags
-    console.log("#{tag.name} is in #{tag.file} with pattern: #{tag.pattern}")
+const stream = ctags.createReadStream('/Users/me/repos/node/tags');
+stream.on('data', (tags) => {
+  for (tag of tags) {
+    console.log(`${tag.name} is in ${tag.file} with pattern: ${tag.pattern}`);
+  }
+});
 ```

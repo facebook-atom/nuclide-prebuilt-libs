@@ -26,22 +26,13 @@
   "homepage": "http://atom.github.io/node-ctags",
   "main": "./lib/ctags.js",
   "devDependencies": {
-    "grunt": "~0.4.0",
-    "grunt-contrib-coffee": "~0.9.0",
-    "grunt-shell": "~0.2.1",
-    "grunt-cli": "~0.1.6",
     "node-gyp": "~0.8.5",
     "jasmine-focused": "1.x",
-    "grunt-coffeelint": "0.0.6",
-    "rimraf": "~2.1.4",
-    "node-cpplint": "0.1.5"
+    "rimraf": "~2.1.4"
   },
   "dependencies": {
     "nan": "^2",
     "event-stream": "~3.1.0"
   },
-  "scripts": {
-    "prepublish": "grunt prepublish",
-    "test": "grunt test"
-  }
+  "scripts": {}
 }
