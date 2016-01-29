@@ -1,18 +1,33 @@
-# Ctags Node module [![Build Status](https://travis-ci.org/atom/node-ctags.png)](https://travis-ci.org/atom/node-ctags)
+# ctags-prebuilt
 
-Read all about ctags [here](http://ctags.sourceforge.net/).
+[![Build Status](https://travis-ci.org/zertosh/ctags-prebuilt.svg?branch=master)](https://travis-ci.org/zertosh/ctags-prebuilt)
+
+Self-sufficient fork of [node-tags](https://travis-ci.org/atom/node-ctags) prebuilt for Mac and Linux. Read all about ctags [here](http://ctags.sourceforge.net/).
+
+## About
+
+`ctags-prebuilt` includes prebuilt binaries of [node-tags](https://travis-ci.org/atom/node-ctags) for Mac and Linux for major versions of node.js and io.js. It's meant for use in [Atom packages](https://atom.io/packages) where your end-user might not have a proper build toolchain.
+
+This module isn't meant to be built by the end-user. It doesn't include the necessary files for it. 
+
+## Building
+
+```
+$ npm version patch
+$ git push --follow-tags
+# wait for travis to build
+$ npm publish
+```
 
 ## Installing
 
 ```sh
-npm install ctags
+npm install ctags-prebuilt
 ```
 
-## Building
-  * Clone the repository
-  * Run `npm install`
-  * Run `grunt` to compile the native and CoffeeScript code
-  * Run `grunt test` to run the specs
+## Usage in Atom Packages
+
+Atom looks in a package's `node_modules` for `.node` files to check for compatibility. Since `ctags-prebuilt` different binaries that are not compatible with your target platform, it's important that you *copy* this library into package directory, instead of including in `dependencies`.
 
 ## Documentation
 
@@ -67,6 +82,7 @@ An `end` event will be emitted when all the tags have been read.
   * `chunkSize` - The number of tags to read at a time (default: `100`).
 
 Returns a stream.
+
 #### Example
 
 ```js
