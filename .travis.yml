@@ -77,7 +77,7 @@ install:
   - npm install
 
 script:
-  - if [[ ! -z $TARGET_ARCH ]]; then
+  - if [[ -z "$TARGET_ARCH" ]]; then
       node-pre-gyp rebuild package testpackage --build-from-source;
       npm test;
     else
