@@ -1,31 +1,45 @@
+sudo: false
+
 os:
   - linux
-sudo: false
+  - osx
 
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test
     packages:
-    - g++-4.8
+      - g++-4.8
+
+env:
+  matrix:
+    - export NODE_VERSION="0.10"  # abi 11
+    - export NODE_VERSION="0.12"  # abi 14
+    - export NODE_VERSION="1.0"   # abi 43
+    - export NODE_VERSION="1.1"   # abi 43
+    - export NODE_VERSION="2"     # abi 44
+    - export NODE_VERSION="3"     # abi 45
+    - export NODE_VERSION="4"     # abi 46
+    - export NODE_VERSION="5"     # abi 47
+
+before_install:
+  - rm -rf ~/.nvm/ && git clone --depth 1 "https://github.com/creationix/nvm.git" ~/.nvm
+  - source ~/.nvm/nvm.sh
+  - nvm install $NODE_VERSION
+  - nvm use $NODE_VERSION
+  - if [[ $NODE_VERSION == "0.10" ]]; then
+      npm -g install npm@latest-2;
+    fi
+  - export PATH="./node_modules/.bin/:$PATH"
 
 install:
   - export CXX=g++-4.8
   - $CXX --version
-  - npm i
+  - npm install
 
-language: node_js
-
-node_js:
-  - "iojs"
-  - "node"
-  - "0.10"
-  - "0.12"
-
-notifications:
-  email:
-    on_success: never
-    on_failure: change
+script:
+  - node-pre-gyp rebuild package testpackage --build-from-source
+  - npm test
 
 git:
   depth: 10
@@ -33,3 +47,18 @@ git:
 branches:
   only:
     - master
+    - /^v\d+\.\d+\.\d+(?:-[a-z0-9.-]+)?$/
+
+before_deploy:
+  - export RELEASE_NODE_FILE=$(find build/stage -name '*.tar.gz')
+  - echo "Deploying $RELEASE_NODE_FILE to GitHub"
+
+deploy:
+  provider: releases
+  api_key:
+    secure: n5WzMhP2lKxVl0e3ztTXfu1NhTAF6mOQ5YsI+q1JPmBVLukTceENyMeApBEVSdKvi7nN0JLdKed5BmtVxVCNJtcTesT8Sw9PkWmkW1hMAUyy6leWX6rRT48rj/Pha0MggeAaPfCoo0jE2VTT0OEX7X1tIzedireCKg5a4cFgTx8UrYJmoaJuKBWE7LVlDUd+Ct2EsNk+DxfNUXUKmX5Hd1EHqVDXVehjODIyDagHMj6rG9bgwOLgauE0wGZgDBZA0RAPL1pivB6KtjWX+FKKzakvFEaUjp3PtDjkNVG+73PF8avnzAis6NXpeTTp67gPrBnxtE3fjboK69YanJ6wO/vs1FzJ40yrzSSzkYEwaFtpK+HEw2UQ4gTlDdYPJRkHV0xQLczZL8u6n5YQzuHjlRIm7ujONk0lnaMQ+MJvB3jm4qimTnhuQPrYi+9fleezK+jiAG35jcE8k7rAfQwXhVo38pwZJRLIGRF8B00U1CoLPf705Z88yDny/i+Md2d1qH0f2N0c9Bpaa3khm1pMJmEaO19m0b8WbKSqrLUBh7im2jvLktO0tGMn1TGf+kMeR3RtEFncloE5L03wO1LJsd8DRO9nW6ejpQMfA8578MI2iQsejaP9RdGpFY0mNDwf4dZE3JvTkKM4LYi0moNRGlOCzWp10h4m6qIYM2ZmQ20=
+  file: "$RELEASE_NODE_FILE"
+  skip_cleanup: true
+  on:
+    repo: zertosh/ctags-prebuilt
+    tags: true

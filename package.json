@@ -1,38 +1,37 @@
 {
-  "name": "ctags",
-  "description": "A package for reading source code tag files",
-  "version": "3.0.0",
+  "name": "ctags-prebuilt",
+  "description": "A package for reading source code tag files prebuilt for Mac and Linux",
+  "version": "0.0.0",
   "keywords": [
     "tags",
     "etags"
   ],
-  "author": {
-    "name": "Kevin Sawicki",
-    "email": "kevin@github.com"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/atom/node-ctags/raw/master/LICENSE.md"
-    }
+  "license": "MIT",
+  "author": "Andres Suarez <zertosh@gmail.com>",
+  "files": [
+    "build/ctags",
+    "lib"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/atom/node-ctags.git"
+  "main": "lib/ctags.js",
+  "repository": "https://github.com/zertosh/ctags-prebuilt",
+  "scripts": {
+    "clean": "rm -rf build",
+    "preinstall": "node -e 'process.exit(0)'",
+    "test": "jasmine-node --captureExceptions spec",
+    "rebuild": "node-pre-gyp clean rebuild --build-from-source"
   },
-  "bugs": {
-    "url": "https://github.com/atom/node-ctags/issues"
-  },
-  "homepage": "http://atom.github.io/node-ctags",
-  "main": "./lib/ctags.js",
+  "dependencies": {},
   "devDependencies": {
-    "node-gyp": "~0.8.5",
-    "jasmine-focused": "1.x",
-    "rimraf": "~2.1.4"
+    "jasmine-node": "^1.14.5",
+    "nan": "^2.0.0",
+    "node-pre-gyp": "^0.6.5",
+    "rimraf": "^2.5.1"
   },
-  "dependencies": {
-    "nan": "^2",
-    "event-stream": "~3.1.0"
-  },
-  "scripts": {}
+  "binary": {
+    "module_name": "ctags",
+    "module_path": "./build/{module_name}/v{version}/{node_abi}-{platform}-{arch}/",
+    "host": "https://github.com/",
+    "remote_path": "./zertosh/{module_name}-prebuilt/releases/download/v{version}/",
+    "package_name": "{node_abi}-{platform}-{arch}.tar.gz"
+  }
 }

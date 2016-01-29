@@ -1,6 +1,0 @@
-build/
-spec/
-.travis.yml
-.npmignore
-npm-debug.log
-.node-version
