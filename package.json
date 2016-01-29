@@ -15,10 +15,11 @@
   "main": "lib/ctags.js",
   "repository": "https://github.com/zertosh/ctags-prebuilt",
   "scripts": {
-    "clean": "rm -rf build",
     "preinstall": "node -e 'process.exit(0)'",
     "test": "jasmine-node --captureExceptions spec",
-    "rebuild": "node-pre-gyp clean rebuild --build-from-source"
+    "clean": "rm -rf build",
+    "rebuild": "node-pre-gyp clean rebuild --build-from-source",
+    "prepublish": "node tools/prepublish.js"
   },
   "dependencies": {},
   "devDependencies": {
