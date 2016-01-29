@@ -1,12 +1,18 @@
+/**
+ * Based on https://github.com/node-inspector/v8-profiler/blob/5a6a00d/tools/prepublish.js
+ */
 'use strict';
+
+if (process.env.CI) process.exit(0);
 
 if (process.env.npm_config_argv) {
   var npm_argv = JSON.parse(process.env.npm_config_argv);
   if (npm_argv.original[0] !== 'publish') process.exit(0);
 }
 
-var rimraf = require('rimraf');
+var extend = require('util')._extend;
 var gyp = require('node-pre-gyp');
+var rimraf = require('rimraf');
 
 rimraf.sync('./build');
 
@@ -18,9 +24,9 @@ var matrix = {
 };
 
 var targets = [];
-Object.keys(matrix).forEach(arch => {
-  matrix[arch].forEach(platform => {
-    versions.forEach(version => {
+Object.keys(matrix).forEach(function(arch) {
+  matrix[arch].forEach(function(platform) {
+    versions.forEach(function(version) {
       targets.push({
         target: version,
         target_platform: platform,
@@ -35,10 +41,8 @@ Object.keys(matrix).forEach(arch => {
     console.log(err.message);
     process.exit(1);
   }
-  if (!targets.length) {
-    process.exit(0);
-  }
   var target = targets.pop();
-  var prog = Object.assign(new gyp.Run(), {opts: target});
+  if (!target) process.exit(0);
+  var prog = extend(new gyp.Run(), {opts: target});
   prog.commands.install([], next);
 })();
