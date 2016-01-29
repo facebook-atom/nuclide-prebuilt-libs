@@ -77,8 +77,12 @@ install:
   - npm install
 
 script:
-  - node-pre-gyp rebuild package testpackage --build-from-source --target_arch=$TARGET_ARCH
-  - npm test
+  - if [[ ! -z $TARGET_ARCH ]]; then
+      node-pre-gyp rebuild package testpackage --build-from-source;
+      npm test;
+    else
+      node-pre-gyp rebuild package testpackage --build-from-source --target_arch=$TARGET_ARCH;
+    fi
 
 git:
   depth: 10
