@@ -21,6 +21,7 @@ var versions = [
 ];
 var matrix = {
   x64: ['linux', 'darwin'],
+  ia32: ['darwin']
 };
 
 var targets = [];
