@@ -11,13 +11,7 @@ matrix:
   include:
     # linux
     - os: linux
-      env: NODE_VERSION="0.10"  # abi 11
-    - os: linux
       env: NODE_VERSION="0.12"  # abi 14
-    - os: linux
-      env: NODE_VERSION="1.0"   # abi 43
-    - os: linux
-      env: NODE_VERSION="1.1"   # abi 43
     - os: linux
       env: NODE_VERSION="2"     # abi 44
     - os: linux
@@ -28,13 +22,7 @@ matrix:
       env: NODE_VERSION="5"     # abi 47
     # os x x86
     - os: osx
-      env: NODE_VERSION="0.10"
-    - os: osx
       env: NODE_VERSION="0.12"
-    - os: osx
-      env: NODE_VERSION="1.0"
-    - os: osx
-      env: NODE_VERSION="1.1"
     - os: osx
       env: NODE_VERSION="2"
     - os: osx
@@ -45,13 +33,7 @@ matrix:
       env: NODE_VERSION="5"
     # osx ia32
     - os: osx
-      env: NODE_VERSION="0.10" TARGET_ARCH="ia32"
-    - os: osx
       env: NODE_VERSION="0.12" TARGET_ARCH="ia32"
-    - os: osx
-      env: NODE_VERSION="1.0" TARGET_ARCH="ia32"
-    - os: osx
-      env: NODE_VERSION="1.1" TARGET_ARCH="ia32"
     - os: osx
       env: NODE_VERSION="2" TARGET_ARCH="ia32"
     - os: osx
