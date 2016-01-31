@@ -10,7 +10,6 @@ if (process.env.npm_config_argv) {
   if (npm_argv.original[0] !== 'publish') process.exit(0);
 }
 
-var extend = require('util')._extend;
 var gyp = require('node-pre-gyp');
 var rimraf = require('rimraf');
 
@@ -48,6 +47,7 @@ Object.keys(matrix).forEach(function(arch) {
   }
   var target = targets.pop();
   if (!target) process.exit(0);
-  var prog = extend(new gyp.Run(), {opts: target});
+  var prog = new gyp.Run();
+  prog.opts = target;
   prog.commands.install([], next);
 })();
