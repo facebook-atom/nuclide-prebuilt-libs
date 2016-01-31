@@ -21,13 +21,18 @@
     "rebuild": "node-pre-gyp clean rebuild --build-from-source",
     "prepublish": "node tools/prepublish.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "semver": "^5.0.0"
+  },
   "devDependencies": {
     "jasmine-node": "^1.14.5",
     "nan": "^2.0.0",
     "node-pre-gyp": "^0.6.5",
     "rimraf": "^2.5.1"
   },
+  "bundledDependencies": [
+    "semver"
+  ],
   "binary": {
     "module_name": "ctags",
     "module_path": "./build/{module_name}/v{version}/{node_abi}-{platform}-{arch}/",
