@@ -22,7 +22,7 @@
     "prepublish": "node tools/prepublish.js"
   },
   "dependencies": {
-    "semver": "^5.0.0"
+    "pre-binding": "^1.0.0"
   },
   "devDependencies": {
     "jasmine-node": "^1.14.5",
@@ -31,7 +31,7 @@
     "rimraf": "^2.5.1"
   },
   "bundledDependencies": [
-    "semver"
+    "pre-binding"
   ],
   "binary": {
     "module_name": "ctags",
