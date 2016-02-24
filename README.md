@@ -27,7 +27,7 @@ npm install ctags-prebuilt
 
 ## Usage in Atom Packages
 
-Atom looks in a package's `node_modules` for `.node` files to check for compatibility. Since `ctags-prebuilt` different binaries that are not compatible with your target platform, it's important that you *copy* this library into package directory, instead of including in `dependencies`.
+Atom looks in a package's `node_modules` for `.node` files to check for compatibility. Since `ctags-prebuilt` bundles different binaries that are not compatible with your target platform, it's important that you *copy* this library into package directory, instead of including in `dependencies`.
 
 ## Documentation
 
