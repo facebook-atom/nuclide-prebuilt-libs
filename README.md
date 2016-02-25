@@ -8,7 +8,7 @@ Self-sufficient fork of [node-tags](https://travis-ci.org/atom/node-ctags) prebu
 
 `ctags-prebuilt` includes prebuilt binaries of [node-tags](https://travis-ci.org/atom/node-ctags) for Mac and Linux for major versions of node.js and io.js. It's meant for use in [Atom packages](https://atom.io/packages) where your end-user might not have a proper build toolchain.
 
-This module isn't meant to be built by the end-user. It doesn't include the necessary files for it. 
+This module isn't meant to be built by the end-user. It doesn't include the necessary files for it.
 
 ## Building
 
@@ -45,11 +45,18 @@ Get all tags matching the tag specified from the tags file at the path.
     (default: `false`)
   * `partialMatch` - `true` to include tags that partially match the given tag
     (default: `false`)
+  * `limit` - maximum number of matches to return. Should be a positive integer.
+    (default: unlimited)
 
 * `callback` - The function to call when complete with an error as the first
-             argument and an array containing objects that have `name` and
-             `file` keys and optionally a `pattern` key if the tag file
-             specified contains tag patterns.
+             argument and an array containing tag objects. Each tag object contains:
+
+  * `name` - name of the tag
+  * `file` - location of the tag
+  * `kind` - kind of the tag (see `ctags --list-kinds`)
+  * `lineNumber` - line number of the tag in `file` (defaults to 0 if not provided)
+  * `pattern` (optional) - pattern to search for in `file` (only if provided in tag file)
+  * `fields` (optional) - object with string values; extra fields for the tag (only if provided in tag file)
 
 #### Example
 
