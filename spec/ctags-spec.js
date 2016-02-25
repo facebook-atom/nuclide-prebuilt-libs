@@ -80,6 +80,24 @@ describe('ctags.findTags(name, options, callback)', function() {
       });
     });
   });
+
+  describe('when limit is set', function() {
+    it('returns the correct number of tags', function() {
+      var callback = jasmine.createSpy('callback');
+      ctags.findTags(tagsFile, 'dup', {partialMatch: true, limit: 1}, callback);
+
+      waitsFor(function() {
+        return callback.callCount === 1;
+      });
+
+      runs(function() {
+        var tags = callback.argsForCall[0][1];
+        expect(callback.argsForCall[0][0]).toBeFalsy();
+        expect(tags.length).toBe(1);
+        expect(tags[0].name).toBe('duplicate');
+      });
+    });
+  });
 });
 
 describe('ctags.createReadStream(tagsFilePath)', function() {
