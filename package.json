@@ -22,7 +22,7 @@
     "prepublish": "node tools/prepublish.js"
   },
   "dependencies": {
-    "pre-binding": "^1.0.0"
+    "pre-binding": "^1.1.0"
   },
   "devDependencies": {
     "jasmine-node": "^1.14.5",
