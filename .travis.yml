@@ -11,37 +11,25 @@ matrix:
   include:
     # linux
     - os: linux
-      env: NODE_VERSION="0.12"  # abi 14
-    - os: linux
-      env: NODE_VERSION="2"     # abi 44
-    - os: linux
-      env: NODE_VERSION="3"     # abi 45
-    - os: linux
       env: NODE_VERSION="4"     # abi 46
     - os: linux
       env: NODE_VERSION="5"     # abi 47
+    - os: linux
+      env: NODE_VERSION="6"     # abi 48
     # os x x86
-    - os: osx
-      env: NODE_VERSION="0.12"
-    - os: osx
-      env: NODE_VERSION="2"
-    - os: osx
-      env: NODE_VERSION="3"
     - os: osx
       env: NODE_VERSION="4"
     - os: osx
       env: NODE_VERSION="5"
+    - os: osx
+      env: NODE_VERSION="6"
     # osx ia32
-    - os: osx
-      env: NODE_VERSION="0.12" TARGET_ARCH="ia32"
-    - os: osx
-      env: NODE_VERSION="2" TARGET_ARCH="ia32"
-    - os: osx
-      env: NODE_VERSION="3" TARGET_ARCH="ia32"
     - os: osx
       env: NODE_VERSION="4" TARGET_ARCH="ia32"
     - os: osx
       env: NODE_VERSION="5" TARGET_ARCH="ia32"
+    - os: osx
+      env: NODE_VERSION="6" TARGET_ARCH="ia32"
 
 before_install:
   - rm -rf ~/.nvm/ && git clone --depth 1 "https://github.com/creationix/nvm.git" ~/.nvm
