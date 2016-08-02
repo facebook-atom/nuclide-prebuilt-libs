@@ -13,21 +13,21 @@ matrix:
     - os: linux
       env: NODE_VERSION="4"     # abi 46
     - os: linux
-      env: NODE_VERSION="5"     # abi 47
+      env: NODE_VERSION="5.1.1"     # abi 47
     - os: linux
       env: NODE_VERSION="6"     # abi 48
     # os x x86
     - os: osx
       env: NODE_VERSION="4"
     - os: osx
-      env: NODE_VERSION="5"
+      env: NODE_VERSION="5.1.1"
     - os: osx
       env: NODE_VERSION="6"
     # osx ia32
     - os: osx
       env: NODE_VERSION="4" TARGET_ARCH="ia32"
     - os: osx
-      env: NODE_VERSION="5" TARGET_ARCH="ia32"
+      env: NODE_VERSION="5.1.1" TARGET_ARCH="ia32"
     - os: osx
       env: NODE_VERSION="6" TARGET_ARCH="ia32"
 
