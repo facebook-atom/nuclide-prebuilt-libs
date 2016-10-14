@@ -17,6 +17,11 @@
             4506,  # no definition for inline function
           ],
         }],
+        ['OS == "linux"', {
+          'ldflags': [
+            '-static-libstdc++',
+          ],
+        }],
       ],
     },
     {
