@@ -19,6 +19,7 @@
     "test": "jasmine-node --captureExceptions spec",
     "clean": "rm -rf build",
     "rebuild": "node-pre-gyp clean rebuild --build-from-source",
+    "install": "node-pre-gyp install --fallback-to-build",
     "prepublish": "node tools/prepublish.js"
   },
   "dependencies": {},
