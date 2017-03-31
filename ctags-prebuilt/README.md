@@ -10,25 +10,6 @@ Self-sufficient fork of [node-tags](https://travis-ci.org/atom/node-ctags) prebu
 
 This module isn't meant to be built by the end-user. It doesn't include the necessary files for it.
 
-## Building
-
-```
-$ npm version patch
-$ git push --follow-tags
-# wait for travis to build
-$ npm publish
-```
-
-## Installing
-
-```sh
-npm install ctags-prebuilt
-```
-
-## Usage in Atom Packages
-
-Atom looks in a package's `node_modules` for `.node` files to check for compatibility. Since `ctags-prebuilt` bundles different binaries that are not compatible with your target platform, it's important that you *copy* this library into package directory, instead of including in `dependencies`.
-
 ## Documentation
 
 ### findTags(tagsFilePath, tag, [options], callback)
