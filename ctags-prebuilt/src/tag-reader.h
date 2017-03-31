@@ -1,0 +1,27 @@
+#ifndef SRC_TAG_READER_H_
+#define SRC_TAG_READER_H_
+
+#include <vector>
+#include "nan.h"
+#include "tag.h"
+#include "readtags.h"
+
+using namespace v8;
+
+class TagReader : public Nan::AsyncWorker {
+ public:
+  TagReader(Nan::Callback *callback, int chunkSize, tagFile *file)
+    : Nan::AsyncWorker(callback), chunkSize(chunkSize), file(file) {}
+
+  ~TagReader() {}
+
+  void Execute();
+  void HandleOKCallback();
+
+ private:
+  int chunkSize;
+  std::vector< Tag > tags;
+  tagFile *file;
+};
+
+#endif  // SRC_TAG_READER_H_
