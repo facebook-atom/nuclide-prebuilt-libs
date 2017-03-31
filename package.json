@@ -1,0 +1,23 @@
+{
+  "name": "nuclide-prebuilt-libs",
+  "description": "Nuclide's binary dependencies prebuilt for various platforms",
+  "version": "0.0.0",
+  "keywords": [],
+  "homepage": "https://nuclide.io/",
+  "license": "SEE LICENSE IN LICENSE",
+  "files": [
+    "ctags-prebuilt/build/ctags",
+    "ctags-prebuilt/lib",
+    "fuzzy-native/build/fuzzy-native",
+    "fuzzy-native/lib"
+  ],
+  "main": "./index.js",
+  "repository": "https://github.com/facebook/nuclide",
+  "scripts": {
+    "test-ctags-prebuilt": "cd ctags-prebuilt && npm install && npm run rebuild",
+    "test-fuzzy-native": "cd fuzzy-native && npm install && npm run rebuild",
+    "test": "npm run test-ctags-prebuilt && npm run test-fuzzy-native"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
