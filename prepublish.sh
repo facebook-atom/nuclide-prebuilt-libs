@@ -28,6 +28,7 @@ MODULE_NAMES=(
 
 for module_name in "${MODULE_NAMES[@]}"; do
   pushd "$module_name"
+    npm install
     for target in "${TARGETS[@]}"; do
       env "npm_config_${module_name}_binary_host_mirror="$BINARY_HOST_MIRROR"" \
         ./node_modules/.bin/node-pre-gyp install $target
