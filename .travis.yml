@@ -38,18 +38,28 @@ install:
       export npm_config_runtime=electron;
       export npm_config_build_from_source=true;
     fi
-  - cd ctags-prebuilt && npm install && npm run build
-  - cd fuzzy-native && npm install && npm run build
+  - |
+    pushd ctags-prebuilt
+    npm install
+    npm run build
+    popd
+  - |
+    pushd fuzzy-native
+    npm install
+    npm run build
+    popd
 
 script:
   - |
-    cd ctags-prebuilt
+    pushd ctags-prebuilt
     [[ -z "$ELECTRON" ]] && npm test
     node-pre-gyp package testpackage
+    popd
   - |
-    cd fuzzy-native
+    pushd fuzzy-native
     [[ -z "$ELECTRON" ]] && npm test
     node-pre-gyp package testpackage
+    popd
 
 git:
   depth: 10
