@@ -1,7 +1,5 @@
 # ctags-prebuilt
 
-[![Build Status](https://travis-ci.org/zertosh/ctags-prebuilt.svg?branch=master)](https://travis-ci.org/zertosh/ctags-prebuilt)
-
 Self-sufficient fork of [node-tags](https://travis-ci.org/atom/node-ctags) prebuilt for Mac and Linux. Read all about ctags [here](http://ctags.sourceforge.net/).
 
 ## About
