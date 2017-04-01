@@ -14,8 +14,8 @@
   "main": "./index.js",
   "repository": "https://github.com/facebook/nuclide",
   "scripts": {
-    "test-ctags-prebuilt": "cd ctags-prebuilt && npm install && npm run rebuild",
-    "test-fuzzy-native": "cd fuzzy-native && npm install && npm run rebuild",
+    "test-ctags-prebuilt": "(cd ctags-prebuilt && npm install && npm run rebuild)",
+    "test-fuzzy-native": "(cd fuzzy-native && npm install && npm run rebuild)",
     "test": "npm run test-ctags-prebuilt && npm run test-fuzzy-native"
   },
   "dependencies": {},
