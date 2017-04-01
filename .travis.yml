@@ -39,7 +39,7 @@ install:
       export npm_config_build_from_source=true;
     fi
   - |
-    pushd ctags-prebuilt
+    pushd ctags
     npm install
     npm run build
     popd
@@ -51,7 +51,7 @@ install:
 
 script:
   - |
-    pushd ctags-prebuilt
+    pushd ctags
     [[ -z "$ELECTRON" ]] && npm test
     node-pre-gyp package testpackage
     popd

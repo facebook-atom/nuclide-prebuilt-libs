@@ -1,10 +1,10 @@
-# ctags-prebuilt
+# ctags
 
 Self-sufficient fork of [node-tags](https://travis-ci.org/atom/node-ctags) prebuilt for Mac and Linux. Read all about ctags [here](http://ctags.sourceforge.net/).
 
 ## About
 
-`ctags-prebuilt` includes prebuilt binaries of [node-tags](https://travis-ci.org/atom/node-ctags) for Mac and Linux for major versions of node.js and io.js. It's meant for use in [Atom packages](https://atom.io/packages) where your end-user might not have a proper build toolchain.
+`ctags` includes prebuilt binaries of [node-tags](https://travis-ci.org/atom/node-ctags) for Mac and Linux for major versions of node.js and io.js. It's meant for use in [Atom packages](https://atom.io/packages) where your end-user might not have a proper build toolchain.
 
 This module isn't meant to be built by the end-user. It doesn't include the necessary files for it.
 
@@ -40,7 +40,7 @@ Get all tags matching the tag specified from the tags file at the path.
 #### Example
 
 ```js
-const ctags = require('ctags');
+const ctags = require('nuclide-prebuilt-libs/ctags');
 
 ctags.findTags('/Users/me/repos/node/tags', 'exists', (error, tags=[]) => {
   for (tag of tags) {
@@ -72,7 +72,7 @@ Returns a stream.
 #### Example
 
 ```js
-const ctags = require('ctags');
+const ctags = require('nuclide-prebuilt-libs/ctags');
 
 const stream = ctags.createReadStream('/Users/me/repos/node/tags');
 stream.on('data', (tags) => {
