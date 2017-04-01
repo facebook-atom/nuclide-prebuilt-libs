@@ -8,6 +8,7 @@ addons:
       - g++-4.9
 
 matrix:
+  # abi versions https://github.com/mapbox/node-pre-gyp/blob/master/lib/util/abi_crosswalk.json
   include:
     # linux
     - os: linux   # abi 47
@@ -16,6 +17,8 @@ matrix:
       env: NODE_VERSION="6" CXX="g++-4.9"
     - os: linux   # abi 49
       env: NODE_VERSION="6" ELECTRON="1.3.6" CXX="g++-4.9"
+    - os: linux   # abi 51
+      env: NODE_VERSION="7" CXX="g++-4.9"
     # os x x86
     - os: osx
       env: NODE_VERSION="5.1.1" CXX="clang"
@@ -23,6 +26,8 @@ matrix:
       env: NODE_VERSION="6" CXX="clang"
     - os: osx
       env: NODE_VERSION="6" ELECTRON="1.3.6" CXX="clang"
+    - os: osx
+      env: NODE_VERSION="7" CXX="clang"
 
 before_install:
   - rm -rf ~/.nvm/ && git clone --depth 1 "https://github.com/creationix/nvm.git" ~/.nvm
