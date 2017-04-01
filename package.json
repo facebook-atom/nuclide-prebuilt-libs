@@ -6,10 +6,11 @@
   "homepage": "https://nuclide.io/",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
-    "ctags/build/ctags",
+    "ctags/build/ctags-*",
     "ctags/lib",
-    "fuzzy-native/build/fuzzy-native",
-    "fuzzy-native/lib"
+    "fuzzy-native/build/fuzzy-native-*",
+    "fuzzy-native/lib",
+    "find-binary.js"
   ],
   "main": "./index.js",
   "repository": "https://github.com/facebook/nuclide",

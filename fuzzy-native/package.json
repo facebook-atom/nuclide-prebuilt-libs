@@ -26,9 +26,9 @@
   },
   "binary": {
     "module_name": "fuzzy-native",
-    "module_path": "./build/{module_name}/v{version}/{node_abi}-{platform}-{arch}/",
+    "module_path": "./build/{module_name}-v{version}-{node_abi}-{platform}-{arch}/",
     "host": "",
-    "package_name": "{node_abi}-{platform}-{arch}.tar.gz"
+    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz"
   },
   "private": true
 }
