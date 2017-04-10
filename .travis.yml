@@ -53,6 +53,11 @@ install:
       npm install
       npm run build
     popd
+  - |
+    pushd pty.js
+      npm install
+      npm run build
+    popd
 
 script:
   - |
@@ -62,6 +67,11 @@ script:
     popd
   - |
     pushd fuzzy-native
+      [[ -z "$ELECTRON" ]] && npm test
+      node-pre-gyp package testpackage
+    popd
+  - |
+    pushd pty.js
       [[ -z "$ELECTRON" ]] && npm test
       node-pre-gyp package testpackage
     popd
