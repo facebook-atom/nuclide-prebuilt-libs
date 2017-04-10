@@ -4,6 +4,14 @@
     'include_dirs' : [
       '<!(node -e "require(\'nan\')")'
     ],
+    'cflags': [
+      '-std=c++11'
+    ],
+    'xcode_settings': {
+      'OTHER_CPLUSPLUSFLAGS': [
+        '-std=c++11'
+      ],
+    },
     'conditions': [
       ['OS=="win"', {
         # "I disabled those warnings because of winpty" - @peters (GH-40)
@@ -39,6 +47,17 @@
           '-lutil'
         ]
       }],
+    ]
+  },
+  {
+    'target_name': 'action_after_build',
+    'type': 'none',
+    'dependencies': [ '<(module_name)' ],
+    'copies': [
+      {
+        'files': [ '<(PRODUCT_DIR)/<(module_name).node' ],
+        'destination': '<(module_path)'
+      }
     ]
   }]
 }

@@ -4,9 +4,10 @@
  * Binding to the pseudo terminals.
  */
 
+const findBinary = require('../../find-binary');
 var extend = require('extend');
 var EventEmitter = require('events').EventEmitter;
-var pty = require('../build/Release/pty.node');
+var pty = require(findBinary(require.resolve('../package.json')));
 var net = require('net');
 var tty = require('tty');
 var nextTick = global.setImmediate || process.nextTick;

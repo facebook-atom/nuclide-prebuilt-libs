@@ -1,5 +1,14 @@
 # pty.js
 
+Fork of [pty.js](https://github.com/chjj/pty.js) prebuilt for Mac and Linux.
+
+## About
+
+`pty.js-prebuilt` includes prebuilt binaries of [pty.js](https://github.com/chjj/pty.js) for Mac and Linux for major versions of node.js and electron. It is meant for use in [Atom packages](https://atom.io/packages) where your end-user might not have a proper build toolchain.
+
+This module is not meant to be built by the end-user and does not include the necessary files to do so.
+
+This module implements
 `forkpty(3)` bindings for node.js. This allows you to fork processes with pseudo
 terminal file descriptors. It returns a terminal object which allows reads
 and writes.
@@ -13,9 +22,9 @@ This is useful for:
 ## Example Usage
 
 ``` js
-var pty = require('pty.js');
+const pty = require('nuclide-prebuilt-libs/pty.js');
 
-var term = pty.spawn('bash', [], {
+const term = pty.spawn('bash', [], {
   name: 'xterm-color',
   cols: 80,
   rows: 30,
@@ -49,3 +58,4 @@ all code is your original work. `</legalese>`
 ## License
 
 Copyright (c) 2012-2015, Christopher Jeffrey (MIT License).
+Copyright (c) 2017, Michael Marucheck (MIT License).
