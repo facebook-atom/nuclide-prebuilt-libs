@@ -26,6 +26,7 @@ TARGETS=(
 MODULE_NAMES=(
   "ctags"
   "fuzzy-native"
+  "pty"
 )
 
 for module_name in "${MODULE_NAMES[@]}"; do
