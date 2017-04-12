@@ -1,10 +1,2 @@
-.git*
-build/
-.lock-wscript
-out/
-Makefile.gyp
-*.Makefile
-*.target.gyp.mk
-node_modules/
-test/
-*.node
+# This file is here so npm doesn't use .gitignore to decide what to pack.
+# See the root package.json's "files" for what is included.

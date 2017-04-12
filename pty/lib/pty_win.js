@@ -5,7 +5,6 @@
 
 var net = require('net');
 var path = require('path');
-var extend = require('extend');
 var inherits = require('util').inherits;
 var BaseTerminal = require('./pty').Terminal;
 var pty = require('../build/Release/pty.node');
@@ -115,7 +114,7 @@ function Terminal(file, args, opt) {
   file = file || 'cmd.exe';
   opt = opt || {};
 
-  env = extend({}, opt.env);
+  env = Object.assign({}, opt.env);
 
   cols = opt.cols || 80;
   rows = opt.rows || 30;

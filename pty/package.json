@@ -1,33 +1,26 @@
 {
-  "name": "pty.js",
-  "description": "Pseudo terminals for node.",
-  "author": "Christopher Jeffrey",
-  "version": "0.3.1",
+  "name": "pty",
+  "description": "Prebuilt fork of Christopher Jeffrey's pty.js v0.3.1",
+  "version": "0.0.1",
   "license": "MIT",
   "main": "./index.js",
-  "repository": "git://github.com/chjj/pty.js.git",
-  "homepage": "https://github.com/chjj/pty.js",
-  "bugs": {
-    "url": "https://github.com/chjj/pty.js/issues"
-  },
-  "keywords": [
-    "pty",
-    "tty",
-    "terminal"
-  ],
   "scripts": {
-    "test": "NODE_ENV=test mocha -R spec"
+    "preinstall": "node -e 'process.exit(0)'",
+    "test": "NODE_ENV=test mocha -R spec",
+    "build": "node-pre-gyp configure build",
+    "rebuild": "node-pre-gyp rebuild"
   },
-  "tags": [
-    "pty",
-    "tty",
-    "terminal"
-  ],
-  "dependencies": {
-    "extend": "~1.2.1",
-    "nan": "2.3.5"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "mocha": "~1.17.1"
-  }
+    "mocha": "~1.17.1",
+    "nan": "^2.0.0",
+    "node-pre-gyp": "^0.6.34"
+  },
+  "binary": {
+    "module_name": "pty",
+    "module_path": "./build/{module_name}-v{version}-{node_abi}-{platform}-{arch}/",
+    "host": "",
+    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz"
+  },
+  "private": true
 }

@@ -4,9 +4,9 @@
  * Binding to the pseudo terminals.
  */
 
-var extend = require('extend');
+const findBinary = require('../../find-binary');
 var EventEmitter = require('events').EventEmitter;
-var pty = require('../build/Release/pty.node');
+var pty = require(findBinary(require.resolve('../package.json')));
 var net = require('net');
 var tty = require('tty');
 var nextTick = global.setImmediate || process.nextTick;
@@ -69,7 +69,7 @@ function Terminal(file, args, opt) {
   gid = opt.gid != null ? opt.gid : -1;
 
   opt.env = opt.env || process.env;
-  env = extend({}, opt.env);
+  env = Object.assign({}, opt.env);
 
   if (opt.env === process.env) {
     // Make sure we didn't start our
