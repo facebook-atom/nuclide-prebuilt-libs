@@ -1,0 +1,26 @@
+{
+  "name": "pty",
+  "description": "Prebuilt fork of Christopher Jeffrey's pty.js v0.3.1",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "./index.js",
+  "scripts": {
+    "preinstall": "node -e 'process.exit(0)'",
+    "test": "NODE_ENV=test mocha -R spec",
+    "build": "node-pre-gyp configure build",
+    "rebuild": "node-pre-gyp rebuild"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "~1.17.1",
+    "nan": "^2.0.0",
+    "node-pre-gyp": "^0.6.34"
+  },
+  "binary": {
+    "module_name": "pty",
+    "module_path": "./build/{module_name}-v{version}-{node_abi}-{platform}-{arch}/",
+    "host": "",
+    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz"
+  },
+  "private": true
+}
