@@ -47,7 +47,7 @@ before_install:
 install:
   - if [[ -n "$ELECTRON" ]]; then
       export npm_config_target=$ELECTRON;
-      export npm_config_disturl=https://atom.io/download/atom-shell;
+      export npm_config_disturl=https://atom.io/download/electron;
       export npm_config_runtime=electron;
       export npm_config_build_from_source=true;
     fi
