@@ -10,13 +10,13 @@ module.exports = function findBinary(packageJsonPath) {
   var nodeAbi = '';
   
   switch(process.versions.modules) {
-    case '49':
+    case 49:
       nodeAbi = 'electron-v1.3';
       break;
-    case '50':
+    case 50:
       nodeAbi = 'electron-v1.4';
       break;
-    case '53':
+    case 53:
       nodeAbi = 'electron-v1.6';
       break;
     default:
