@@ -11,7 +11,8 @@ import { ProcessEnv, IPtyForkOptions, IPtyOpenOptions } from './interfaces';
 import { ArgvOrCommandLine } from './types';
 import { assign } from './utils';
 
-const pty = require(path.join('..', 'build', 'Release', 'pty.node'));
+const findBinary = require('../../find-binary');
+const pty = require(findBinary(require.resolve('../package.json')));
 
 const DEFAULT_FILE = 'sh';
 const DEFAULT_NAME = 'xterm';

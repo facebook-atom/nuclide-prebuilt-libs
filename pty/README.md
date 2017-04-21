@@ -1,7 +1,14 @@
-# node-pty
+# pty
 
-[![Build Status](https://travis-ci.org/Tyriar/node-pty.svg?branch=master)](https://travis-ci.org/Tyriar/node-pty)
+Fork of [node-pty](https://github.com/Tyriar/node-pty) prebuilt for Nuclide on Mac and Linux.
 
+## About
+
+`pty` includes prebuilt binaries of [node-pty](https://github.com/Tyriar/node-pty) for Mac and Linux for major versions of node.js and electron.  It is meant for use in [Atom packages](https://atom.io/packages) where the end-user might not have a proper build toolchain.
+
+This module is not meant to be built by the end-user and does not include the necessary files to do so.
+
+This module implements
 `forkpty(3)` bindings for node.js. This allows you to fork processes with pseudoterminal file descriptors. It returns a terminal object which allows reads and writes.
 
 This is useful for:
@@ -15,7 +22,7 @@ This is useful for:
 
 ```js
 var os = require('os');
-var pty = require('node-pty');
+var pty = require('nuclide-prebuilt-libs/pty');
 
 var shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
 
