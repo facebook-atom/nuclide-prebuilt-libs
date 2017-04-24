@@ -1,30 +1,32 @@
 # pty
 
-Fork of [pty.js](https://github.com/chjj/pty.js) prebuilt for Mac and Linux.
+Fork of [node-pty](https://github.com/Tyriar/node-pty) prebuilt for Nuclide on Mac and Linux.
 
 ## About
 
-`pty` includes prebuilt binaries of [pty.js](https://github.com/chjj/pty.js) for Mac and Linux for major versions of node.js and electron. It is meant for use in [Atom packages](https://atom.io/packages) where your end-user might not have a proper build toolchain.
+`pty` includes prebuilt binaries of [node-pty](https://github.com/Tyriar/node-pty) for Mac and Linux for major versions of node.js and electron.  It is meant for use in [Atom packages](https://atom.io/packages) where the end-user might not have a proper build toolchain.
 
 This module is not meant to be built by the end-user and does not include the necessary files to do so.
 
 This module implements
-`forkpty(3)` bindings for node.js. This allows you to fork processes with pseudo
-terminal file descriptors. It returns a terminal object which allows reads
-and writes.
+`forkpty(3)` bindings for node.js. This allows you to fork processes with pseudoterminal file descriptors. It returns a terminal object which allows reads and writes.
 
 This is useful for:
 
-- Writing a terminal emulator.
-- Getting certain programs to *think* you're a terminal. This is useful if
-  you need a program to send you control sequences.
+- Writing a terminal emulator (eg. via [xterm.js](https://github.com/sourcelair/xterm.js)).
+- Getting certain programs to *think* you're a terminal, such as when you need a program to send you control sequences.
+
+`node-pty` supports Linux, macOS and Windows. Windows support is possible by utilizing the [winpty](https://github.com/rprichard/winpty) library.
 
 ## Example Usage
 
-``` js
+```js
+var os = require('os');
 var pty = require('nuclide-prebuilt-libs/pty');
 
-var term = pty.spawn('bash', [], {
+var shell = os.platform() === 'win32' ? 'powershell.exe' : 'bash';
+
+var ptyProcess = pty.spawn(shell, [], {
   name: 'xterm-color',
   cols: 80,
   rows: 30,
@@ -32,30 +34,41 @@ var term = pty.spawn('bash', [], {
   env: process.env
 });
 
-term.on('data', function(data) {
+ptyProcess.on('data', function(data) {
   console.log(data);
 });
 
-term.write('ls\r');
-term.resize(100, 40);
-term.write('ls /\r');
-
-console.log(term.process);
+ptyProcess.write('ls\r');
+ptyProcess.resize(100, 40);
+ptyProcess.write('ls\r');
 ```
 
-## Todo
+## Building
 
-- Add tcsetattr(3), tcgetattr(3).
-- Add a way of determining the current foreground job for platforms other
-  than Linux and OSX/Darwin.
+```bash
+# Install dependencies and build C++
+npm install
+# Compile TypeScript -> JavaScript
+npm run tsc
+```
 
-## Contribution and License Agreement
+## Debugging
 
-If you contribute code to this project, you are implicitly allowing your code
-to be distributed under the MIT license. You are also implicitly verifying that
-all code is your original work. `</legalese>`
+On Windows, you can show the winpty agent console window by adding the environment variable `WINPTY_SHOW_CONSOLE=1` to the pty's environment. See https://github.com/rprichard/winpty#debugging-winpty for more information.
+
+## Troubleshooting
+
+**Powershell gives error 8009001d**
+
+> Internal Windows PowerShell error.  Loading managed Windows PowerShell failed with error 8009001d.
+
+This happens when PowerShell is launched with no `SystemRoot` environment variable present.
+
+## pty.js
+
+This project is forked from [chjj/pty.js](https://github.com/chjj/pty.js) with the primary goals being to provide better support for later Node.JS versions and Windows.
 
 ## License
 
-Copyright (c) 2012-2015, Christopher Jeffrey (MIT License).
-Copyright (c) 2017, Michael Marucheck (MIT License).
+Copyright (c) 2012-2015, Christopher Jeffrey (MIT License).<br>
+Copyright (c) 2016, Daniel Imms (MIT License).

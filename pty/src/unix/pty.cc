@@ -1,6 +1,6 @@
 /**
- * pty.js
  * Copyright (c) 2012-2015, Christopher Jeffrey (MIT License)
+ * Copyright (c) 2017, Daniel Imms (MIT License)
  *
  * pty.cc:
  *   This file is responsible for starting processes
@@ -160,6 +160,9 @@ NAN_METHOD(PtyFork) {
       "Usage: pty.fork(file, args, env, cwd, cols, rows, uid, gid, onexit)");
   }
 
+  // Make sure the process still listens to SIGINT
+  signal(SIGINT, SIG_DFL);
+
   // file
   String::Utf8Value file(info[0]->ToString());
 
@@ -198,6 +201,41 @@ NAN_METHOD(PtyFork) {
   winp.ws_xpixel = 0;
   winp.ws_ypixel = 0;
 
+  // termios
+  struct termios* term = new termios();
+#if defined(IUTF8)
+  term->c_iflag = ICRNL | IXON | IXANY | IMAXBEL | BRKINT | IUTF8;
+#else
+  term->c_iflag = ICRNL | IXON | IXANY | IMAXBEL | BRKINT | UTF8;
+#endif
+  term->c_oflag = OPOST | ONLCR;
+  term->c_cflag = CREAD | CS8 | HUPCL;
+  term->c_lflag = ICANON | ISIG | IEXTEN | ECHO | ECHOE | ECHOK | ECHOKE | ECHOCTL;
+
+  term->c_cc[VEOF] = 4;
+  term->c_cc[VEOL] = -1;
+  term->c_cc[VEOL2] = -1;
+  term->c_cc[VERASE] = 0x7f;
+  term->c_cc[VWERASE] = 23;
+  term->c_cc[VKILL] = 21;
+  term->c_cc[VREPRINT] = 18;
+  term->c_cc[VINTR] = 3;
+  term->c_cc[VQUIT] = 0x1c;
+  term->c_cc[VSUSP] = 26;
+  term->c_cc[VSTART] = 17;
+  term->c_cc[VSTOP] = 19;
+  term->c_cc[VLNEXT] = 22;
+  term->c_cc[VDISCARD] = 15;
+  term->c_cc[VMIN] = 1;
+  term->c_cc[VTIME] = 0;
+
+  #if (__APPLE__)
+  term->c_cc[VDSUSP] = 25;
+  term->c_cc[VSTATUS] = 20;
+  #endif
+
+  cfsetspeed(term, B38400);
+
   // uid / gid
   int uid = info[6]->IntegerValue();
   int gid = info[7]->IntegerValue();
@@ -205,7 +243,7 @@ NAN_METHOD(PtyFork) {
   // fork the pty
   int master = -1;
   char name[40];
-  pid_t pid = pty_forkpty(&master, name, NULL, &winp);
+  pid_t pid = pty_forkpty(&master, name, term, &winp);
 
   if (pid) {
     for (i = 0; i < argl; i++) free(argv[i]);
@@ -219,7 +257,12 @@ NAN_METHOD(PtyFork) {
     case -1:
       return Nan::ThrowError("forkpty(3) failed.");
     case 0:
-      if (strlen(cwd)) chdir(cwd);
+      if (strlen(cwd)) {
+        if (chdir(cwd) == -1) {
+          perror("chdir(2) failed.");
+          _exit(1);
+        }
+      }
 
       if (uid != -1 && gid != -1) {
         if (setgid(gid) == -1) {
