@@ -9,6 +9,7 @@ This repo exists to build Nuclide's binary dependencies for various architecture
 ```js
 const ctags = require('nuclide-prebuilt-libs/ctags');
 const fuzzyNative = require('nuclide-prebuilt-libs/fuzzy-native');
+const keytar = require('nuclide-prebuilt-libs/keytar');
 const ptyjs = require('nuclide-prebuilt-libs/pty');
 ```
 

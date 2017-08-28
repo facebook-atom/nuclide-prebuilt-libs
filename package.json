@@ -20,6 +20,7 @@
     "prepublish": "./prepublish.sh",
     "test-ctags": "(cd ctags && npm install && npm run rebuild)",
     "test-fuzzy-native": "(cd fuzzy-native && npm install && npm run rebuild)",
+    "test-keytar": "(cd keytar && npm install && npm run rebuild)",
     "test-pty": "(cd pty && npm install && npm run rebuild)",
     "test": "npm run test-ctags && npm run test-fuzzy-native && npm run test-pty"
   },
