@@ -1,4 +1,6 @@
-var keytar = require('../build/Release/keytar.node')
+var findBinary = require('../../find-binary');
+var binding_path = findBinary(require.resolve('../package.json'));
+var keytar = require(binding_path);
 
 function checkRequired(val, name) {
   if (!val || val.length <= 0) {
