@@ -1,0 +1,40 @@
+{
+  "main": "./lib/keytar.js",
+  "name": "keytar",
+  "description": "Bindings to native Mac/Linux/Windows password APIs",
+  "version": "4.0.4",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atom/node-keytar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/atom/node-keytar/issues"
+  },
+  "homepage": "http://atom.github.io/node-keytar",
+  "keywords": [
+    "keychain",
+    "password",
+    "passwords",
+    "credential",
+    "credentials",
+    "vault",
+    "credential vault"
+  ],
+  "scripts": {
+    "lint": "npm run cpplint",
+    "cpplint": "node-cpplint --filters legal-copyright,build-include,build-namespaces src/*.cc",
+    "test": "npm run lint && npm build . && mocha --compilers js:babel-core/register spec/"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "node-cpplint": "~0.1.5",
+    "node-gyp": "^3.6.0"
+  },
+  "dependencies": {
+    "nan": "2.5.1"
+  }
+}
