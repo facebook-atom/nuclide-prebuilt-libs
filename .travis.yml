@@ -14,8 +14,6 @@ matrix:
   # abi versions https://github.com/mapbox/node-pre-gyp/blob/master/lib/util/abi_crosswalk.json
   include:
     # linux
-    - os: linux   # abi 47
-      env: NODE_VERSION="5.1.1" CXX="g++-4.9"
     - os: linux   # abi 48
       env: NODE_VERSION="6" CXX="g++-4.9"
     - os: linux   # abi 49
@@ -27,8 +25,6 @@ matrix:
     - os: linux   # abi 53
       env: NODE_VERSION="7.4" ELECTRON="1.6.5" CXX="g++-4.9"
     # os x x86
-    - os: osx     # abi 47
-      env: NODE_VERSION="5.1.1" CXX="clang"
     - os: osx     # abi 48
       env: NODE_VERSION="6" CXX="clang"
     - os: osx     # abi 49
