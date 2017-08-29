@@ -1,0 +1,19 @@
+/* @flow */
+
+declare export function getPassword(
+  service: string,
+  account: string,
+): Promise<?string>;
+
+declare export function setPassword(
+  service: string,
+  account: string,
+  password: string,
+): Promise<void>;
+
+declare export function deletePassword(
+  service: string,
+  account: string,
+): Promise<boolean>;
+
+declare export function findPassword(service: string): Promise<?string>;

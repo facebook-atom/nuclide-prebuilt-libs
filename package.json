@@ -11,6 +11,8 @@
     "fuzzy-native/build/fuzzy-native-*",
     "fuzzy-native/lib",
     "find-binary.js",
+    "keytar/build/keytar-*",
+    "keytar/lib",
     "pty/build/pty-*",
     "pty/lib"
   ],
