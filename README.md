@@ -1,6 +1,7 @@
 # nuclide-prebuilt-libs
 
-[![Build Status](https://travis-ci.org/facebooknuclide/nuclide-prebuilt-libs.svg?branch=master)](https://travis-ci.org/facebooknuclide/nuclide-prebuilt-libs)
+[![Build Status](https://travis-ci.org/facebook-atom/nuclide-prebuilt-libs.svg?branch=master)](https://travis-ci.org/facebook-atom/nuclide-prebuilt-libs)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/p1d8rqkso8incnnw?svg=true)](https://ci.appveyor.com/project/hansonw/nuclide-prebuilt-libs)
 
 This repo exists to build Nuclide's binary dependencies for various architectures.
 
