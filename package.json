@@ -17,7 +17,7 @@
     "pty/lib"
   ],
   "main": "./index.js",
-  "repository": "https://github.com/facebook/nuclide",
+  "repository": "https://github.com/facebook-atom/nuclide-prebuilt-libs",
   "scripts": {
     "prepublish": "./prepublish.sh",
     "test-ctags": "(cd ctags && npm install && npm run rebuild)",
