@@ -53,11 +53,30 @@
     'target_name': 'action_after_build',
     'type': 'none',
     'dependencies': [ '<(module_name)' ],
-    'copies': [
-      {
-        'files': [ '<(PRODUCT_DIR)/<(module_name).node' ],
-        'destination': '<(module_path)'
-      }
-    ]
+    'conditions': [
+      ['OS=="win"', {
+        'copies': [
+          {
+            'files': [ '<(PRODUCT_DIR)/<(module_name).node' ],
+            'destination': '<(module_path)'
+          },
+          {
+            'files': [ '<(PRODUCT_DIR)/winpty.dll' ],
+            'destination': '<(module_path)'
+          },
+          {
+            'files': [ '<(PRODUCT_DIR)/winpty-agent.exe' ],
+            'destination': '<(module_path)'
+          }
+        ]
+      }, {
+        'copies': [
+          {
+            'files': [ '<(PRODUCT_DIR)/<(module_name).node' ],
+            'destination': '<(module_path)'
+          }
+        ]
+      }],
+    ],
   }]
 }

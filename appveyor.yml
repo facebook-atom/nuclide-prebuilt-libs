@@ -1,0 +1,83 @@
+image: Visual Studio 2015
+
+environment:
+  matrix:
+    - nodejs_version: "7"
+    - nodejs_version: "7.4"
+      ELECTRON: "1.6.5"
+
+matrix:
+  fast_finish: true
+
+platform:
+  - x64
+
+configuration:
+  - Release
+
+install:
+  - ps: |
+      Install-Product node $env:nodejs_version x64
+      if ($env:ELECTRON) {
+        $env:npm_config_target=$env:ELECTRON
+        $env:npm_config_disturl="https://atom.io/download/electron"
+        $env:npm_config_runtime="electron"
+        $env:npm_config_build_from_source="true"
+      }
+  - ps: |
+      Push-Location ctags
+      npm install
+      npm run build
+      Pop-Location
+  - ps: |
+      Push-Location fuzzy-native
+      npm install
+      npm run build
+      Pop-Location
+  - ps: |
+      Push-Location keytar
+      npm install
+      npm run build
+      Pop-Location
+  - ps: |
+      Push-Location pty
+      npm install
+      npm run tsc
+      npm run build
+      Pop-Location
+
+test_script:
+  - ps: |
+      Push-Location ctags
+      if (!$env:ELECTRON) { npm test }
+      node_modules/.bin/node-pre-gyp package testpackage
+      Pop-Location
+  - ps: |
+      Push-Location fuzzy-native
+      if (!$env:ELECTRON) { npm test }
+      node_modules/.bin/node-pre-gyp package testpackage
+      Pop-Location
+  - ps: |
+      Push-Location keytar
+      if (!$env:ELECTRON) { npm test }
+      node_modules/.bin/node-pre-gyp package testpackage
+      Pop-Location
+  - ps: |
+      Push-Location pty
+      if (!$env:ELECTRON) { npm test }
+      node_modules/.bin/node-pre-gyp package testpackage
+      Pop-Location
+
+build: off
+
+artifacts:
+  - path: '**\build\stage\*.tar.gz'
+
+deploy:
+  description: $(appveyor_repo_tag_name)
+  provider: GitHub
+  authtoken:
+    secure: DcAmqsYyHesJI2I5q2Ugb2WKqV9fbVfLcpSfAN3awCX3YQaDrWzIT6w8TdVLAFYlw1Hj7P/TVHPxZOcEgZqP8pVM4Y28Tt8b6IcYtpT2Hs1k9FhHJLjZsYIw0l5ka9r2hd03fDXbmLLSg++v8tQjIUkzJrxlop/1wA/EbE03oSoJJ8lHGW3wtCXxkisrkza14IK7MIuROY3gqkeOVlc6wnqNe82ijF7URWnIpspXFxqW9tRHUcb9XjsJqB+by+et8bhtnJp+CzK0Fiz7ENKFNh+680/e5grVH0b8LrH7ChLkIf/AGJAFRkgta48PnvxKwlrhivi1jOfB5wejl3N2Zjm2XHT70Nj4j5ShfvPBxUxhV69nBKiXsl9JP0uLSUItLuaSuf09GiJXk53So/dgQQoiLvGQ6XkRZA2EoRR8G4WzhTG7V3IiKWScEA2o6g7F/v66w4vcTgvWWAQAgvxy2KMRkR1ModvcNxmyOkJqPOcG5vYw4MqZOZzfVOeqxTEUgks/ZC7TwiJnhmQrdQYWUxxqO1l4J+oBfu/3QE2iK7qrQEvMtJTm9IOQZh/Jk7zzCFySPlwpp7zwxVenUx0F3Vdc7SdLUVCEDQi+erR+4cbWJx13wtJCn5qVTrV4+vkR1Th8xlvCFTGRqy335DpGtdfNZBCfkNhSetcCUdwW4kQ=
+  artifact: /.*\\build\\stage\\.*\.tar\.gz/
+  on:
+    appveyor_repo_tag: true
