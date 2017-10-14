@@ -12,17 +12,14 @@ VERSION=$(node -p 'require("./package.json").version')
 BINARY_HOST_MIRROR="https://github.com/facebooknuclide/nuclide-prebuilt-libs/releases/download/v${VERSION}/"
 
 TARGETS=(
-  "--target_platform=linux --runtime=electron --target=1.3.6"
-  "--target_platform=linux --runtime=electron --target=1.4.16"
   "--target_platform=linux --runtime=electron --target=1.6.5"
-  "--target_platform=linux --runtime=node --target=6.0.0"
   "--target_platform=linux --runtime=node --target=7.0.0"
 
-  "--target_platform=darwin --runtime=electron --target=1.3.6"
-  "--target_platform=darwin --runtime=electron --target=1.4.16"
   "--target_platform=darwin --runtime=electron --target=1.6.5"
-  "--target_platform=darwin --runtime=node --target=6.0.0"
   "--target_platform=darwin --runtime=node --target=7.0.0"
+
+  "--target_platform=win32 --runtime=electron --target=1.6.5"
+  "--target_platform=win32 --runtime=node --target=7.0.0"
 )
 
 MODULE_NAMES=(
