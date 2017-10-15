@@ -7,7 +7,8 @@ import * as net from 'net';
 import * as path from 'path';
 import { ArgvOrCommandLine } from './types';
 
-const pty = require(path.join('..', 'build', 'Release', 'pty.node'));
+const findBinary = require('../../find-binary');
+const pty = require(findBinary(require.resolve('../package.json')));
 
 /**
  * Agent. Internal class.
