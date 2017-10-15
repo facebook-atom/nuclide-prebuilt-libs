@@ -99,5 +99,5 @@ deploy:
   file: "*/build/stage/*.tar.gz"
   overwrite: true
   on:
-    repo: facebooknuclide/nuclide-prebuilt-libs
+    repo: facebook-atom/nuclide-prebuilt-libs
     tags: true
