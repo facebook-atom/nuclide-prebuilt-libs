@@ -19,6 +19,9 @@ module.exports = function findBinary(packageJsonPath) {
     case '53':
       nodeAbi = 'electron-v1.6';
       break;
+    case '54':
+      nodeAbi = 'electron-v1.7';
+      break;
     default:
       nodeAbi = 'node-v' + process.versions.modules;
   }
