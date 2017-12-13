@@ -20,7 +20,7 @@ const DEFAULT_NAME = 'xterm';
 export class UnixTerminal extends Terminal {
   protected pid: number;
   protected fd: number;
-  protected pty: any;
+  protected pty: string;
 
   protected file: string;
   protected name: string;
@@ -214,6 +214,13 @@ export class UnixTerminal extends Terminal {
    */
   public get process(): string {
     return pty.process(this.fd, this.pty) || this.file;
+  }
+
+  /**
+   * Gets the name of the pty
+   */
+  public get ptyName(): string {
+    return this.pty;
   }
 
   /**
