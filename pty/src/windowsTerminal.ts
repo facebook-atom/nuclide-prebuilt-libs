@@ -186,4 +186,9 @@ export class WindowsTerminal extends Terminal {
    * Gets the name of the process.
    */
   public get process(): string { return this.name; }
+
+  /**
+   * Gets the name of the pty
+   */
+  public get ptyName(): string { return this.agent.pty.toString(); }
 }

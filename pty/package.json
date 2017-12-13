@@ -1,7 +1,7 @@
 {
   "name": "pty",
   "description": "Fork of Daniel Imms's fork of Christopher Jeffrey's pseudoterminals in Node.JS",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "license": "MIT",
   "main": "./lib/index.js",
   "scripts": {

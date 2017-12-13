@@ -105,6 +105,11 @@ export abstract class Terminal implements ITerminal {
    */
   public abstract get process(): string;
 
+  /**
+   * Gets the name of the pty
+   */
+  public abstract get ptyName(): string;
+
   // TODO: Should this be in the API?
   public redraw(): void {
     let cols = this.cols;
