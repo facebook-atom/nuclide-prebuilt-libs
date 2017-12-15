@@ -8,6 +8,7 @@ export type ProcessEnv = {
 
 export interface ITerminal {
   +process: string;
+  +ptyName: string;
   +pid: number;
   write(data: string): void;
   resize(cols: number, rows: number): void;

@@ -6,6 +6,7 @@ export type ProcessEnv = {[key: string]: string};
 
 export interface ITerminal {
   process: string;
+  ptyName: string;
 
   write(data: string): void;
   resize(cols: number, rows: number): void;
