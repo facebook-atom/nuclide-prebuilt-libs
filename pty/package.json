@@ -13,8 +13,7 @@
     "rebuild": "node-pre-gyp rebuild",
     "test": "cross-env NODE_ENV=test mocha -R spec test"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^6.0.58",
     "cross-env": "^3.1.3",
