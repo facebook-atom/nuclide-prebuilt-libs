@@ -1,20 +1,24 @@
 {
   "name": "nuclide-prebuilt-libs",
   "description": "Nuclide's binary dependencies prebuilt for various platforms",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "keywords": [],
   "homepage": "https://nuclide.io/",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
     "ctags/build/ctags-*",
     "ctags/lib",
+    "ctags/package.json",
     "fuzzy-native/build/fuzzy-native-*",
     "fuzzy-native/lib",
+    "fuzzy-native/package.json",
     "find-binary.js",
     "keytar/build/keytar-*",
     "keytar/lib",
+    "keytar/package.json",
     "pty/build/pty-*",
-    "pty/lib"
+    "pty/lib",
+    "pty/package.json"
   ],
   "main": "./index.js",
   "repository": "https://github.com/facebook-atom/nuclide-prebuilt-libs",

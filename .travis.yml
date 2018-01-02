@@ -25,7 +25,7 @@ matrix:
       env: NODE_VERSION="7" CXX="clang"
     - os: osx     # abi 53
       env: NODE_VERSION="7.4" ELECTRON="1.6.5" CXX="clang"
-    - os: linux   # abi 54
+    - os: osx     # abi 54
       env: NODE_VERSION="7.4" ELECTRON="1.7.0" CXX="clang"
 
 before_install:
