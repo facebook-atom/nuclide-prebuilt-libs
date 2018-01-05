@@ -27,6 +27,14 @@ export interface ITerminal {
   listenerCount(event: 'data'): number;
   listeners(event: 'data'): Array<(chunk: string) => void>;
 
+  once(event: 'end', listener: () => void): ITerminal;
+  on(event: 'end', listener: () => void): ITerminal;
+  addListener(event: 'end', listener: () => void): ITerminal;
+  removeListener(event: 'end', listener: () => void): ITerminal;
+  removeAllListeners(event: 'end'): ITerminal;
+  listenerCount(event: 'end'): number;
+  listeners(event: 'end'): Array<() => void>;
+
   // The current pty.js only works on unix, so we can expect signal to be defined
   once(event: 'exit',
     listener: (code: number, signal: number) => void): ITerminal;
