@@ -161,6 +161,12 @@ export class UnixTerminal extends Terminal {
     self.slave = new PipeSocket(term.slave);
     self.slave.setEncoding('utf8');
     self.slave.resume();
+    
+    // if the slave closes, then we will get close events on both ends
+    // of the pty. we will use the master's close event to pass along,
+    // but if we don't handle the slave's as well we get an uncaught 
+    // exception.
+    self.slave.on('close', err => {});
 
     self.socket = self.master;
     self.pid = null;
