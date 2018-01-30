@@ -78,8 +78,9 @@ artifacts:
 deploy:
   description: $(appveyor_repo_tag_name)
   provider: GitHub
-  authtoken:
-    secure: DcAmqsYyHesJI2I5q2Ugb2WKqV9fbVfLcpSfAN3awCX3YQaDrWzIT6w8TdVLAFYlw1Hj7P/TVHPxZOcEgZqP8pVM4Y28Tt8b6IcYtpT2Hs1k9FhHJLjZsYIw0l5ka9r2hd03fDXbmLLSg++v8tQjIUkzJrxlop/1wA/EbE03oSoJJ8lHGW3wtCXxkisrkza14IK7MIuROY3gqkeOVlc6wnqNe82ijF7URWnIpspXFxqW9tRHUcb9XjsJqB+by+et8bhtnJp+CzK0Fiz7ENKFNh+680/e5grVH0b8LrH7ChLkIf/AGJAFRkgta48PnvxKwlrhivi1jOfB5wejl3N2Zjm2XHT70Nj4j5ShfvPBxUxhV69nBKiXsl9JP0uLSUItLuaSuf09GiJXk53So/dgQQoiLvGQ6XkRZA2EoRR8G4WzhTG7V3IiKWScEA2o6g7F/v66w4vcTgvWWAQAgvxy2KMRkR1ModvcNxmyOkJqPOcG5vYw4MqZOZzfVOeqxTEUgks/ZC7TwiJnhmQrdQYWUxxqO1l4J+oBfu/3QE2iK7qrQEvMtJTm9IOQZh/Jk7zzCFySPlwpp7zwxVenUx0F3Vdc7SdLUVCEDQi+erR+4cbWJx13wtJCn5qVTrV4+vkR1Th8xlvCFTGRqy335DpGtdfNZBCfkNhSetcCUdwW4kQ=
-  artifact: /.*\\build\\stage\\.*\.tar\.gz/
+  auth_token:
+    secure: rdBc+YLCOY3cFD38CjEn4Z/b6uvCBFiwHAiLg5Lwzs2WoPS0uLTgrW2puQSV5oZp
+  artifact: /.*\.tar\.gz/
+  force_update: true
   on:
     appveyor_repo_tag: true
