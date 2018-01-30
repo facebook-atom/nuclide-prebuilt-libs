@@ -1,7 +1,7 @@
 # nuclide-prebuilt-libs
 
 [![Build Status](https://travis-ci.org/facebook-atom/nuclide-prebuilt-libs.svg?branch=master)](https://travis-ci.org/facebook-atom/nuclide-prebuilt-libs)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/p1d8rqkso8incnnw?svg=true)](https://ci.appveyor.com/project/hansonw/nuclide-prebuilt-libs)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/pnsyi0iqddtpbspc?svg=true)](https://ci.appveyor.com/project/Facebook/nuclide-prebuilt-libs)
 
 This repo exists to build Nuclide's binary dependencies for various architectures.
 
@@ -19,7 +19,7 @@ const ptyjs = require('nuclide-prebuilt-libs/pty');
 1. Bump the `version` in the sub-package you modified. (This is only for bookkeeping purposes).
 2. Run `npm version patch`.
 3. Push the base package version bump and release tag with `git push --follow-tags`.
-4. Wait for travis to build and upload the release artifacts.
+4. Wait for both Travis and AppVeyor to build and upload the release artifacts.
 5. To test your npm release: Run `./prepublish && npm pack`
 6. Run `npm publish`.
 
