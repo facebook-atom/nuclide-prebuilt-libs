@@ -3,10 +3,15 @@
 void TagFinder::Execute() {
   tagEntry entry;
   if (tagsFind(file, &entry, tag.data(), options) == TagSuccess) {
-    matches.push_back(Tag(entry));
-    while ((limit == 0 || matches.size() < limit) &&
-           tagsFindNext(file, &entry) == TagSuccess)
-      matches.push_back(Tag(entry));
+    do {
+      // Malformed tags files may have NULL file paths.
+      if (entry.file != NULL) {
+        matches.push_back(Tag(entry));
+      }
+    } while (
+      (limit == 0 || matches.size() < limit) &&
+      tagsFindNext(file, &entry) == TagSuccess
+    );
   }
 }
 
