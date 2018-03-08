@@ -26,49 +26,49 @@ install:
         $env:npm_config_runtime="electron"
         $env:npm_config_build_from_source="true"
       }
-  - ps: |
-      Push-Location ctags
+  - cmd: |
+      pushd ctags
       npm install
       npm run build
-      Pop-Location
-  - ps: |
-      Push-Location fuzzy-native
+      popd
+  - cmd: |
+      pushd fuzzy-native
       npm install
       npm run build
-      Pop-Location
-  - ps: |
-      Push-Location keytar
+      popd
+  - cmd: |
+      pushd keytar
       npm install
       npm run build
-      Pop-Location
-  - ps: |
-      Push-Location pty
+      popd
+  - cmd: |
+      pushd pty
       npm install
       npm run tsc
       npm run build
-      Pop-Location
+      popd
 
 test_script:
-  - ps: |
-      Push-Location ctags
-      if (!$env:ELECTRON) { npm test }
+  - cmd: |
+      pushd ctags
+      IF NOT DEFINED ELECTRON (npm test)
       node_modules/.bin/node-pre-gyp package testpackage
-      Pop-Location
-  - ps: |
-      Push-Location fuzzy-native
-      if (!$env:ELECTRON) { npm test }
+      popd
+  - cmd: |
+      pushd fuzzy-native
+      IF NOT DEFINED ELECTRON (npm test)
       node_modules/.bin/node-pre-gyp package testpackage
-      Pop-Location
-  - ps: |
-      Push-Location keytar
-      if (!$env:ELECTRON) { npm test }
+      popd
+  - cmd: |
+      pushd keytar
+      IF NOT DEFINED ELECTRON (npm test)
       node_modules/.bin/node-pre-gyp package testpackage
-      Pop-Location
-  - ps: |
-      Push-Location pty
-      if (!$env:ELECTRON) { npm test }
+      popd
+  - cmd: |
+      pushd pty
+      IF NOT DEFINED ELECTRON (npm test)
       node_modules/.bin/node-pre-gyp package testpackage
-      Pop-Location
+      popd
 
 build: off
 
