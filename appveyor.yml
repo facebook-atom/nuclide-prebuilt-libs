@@ -27,48 +27,40 @@ install:
         $env:npm_config_build_from_source="true"
       }
   - cmd: |
-      pushd ctags
+      cd %APPVEYOR_BUILD_FOLDER%\ctags
       npm install
       npm run build
-      popd
   - cmd: |
-      pushd fuzzy-native
+      cd %APPVEYOR_BUILD_FOLDER%\fuzzy-native
       npm install
       npm run build
-      popd
   - cmd: |
-      pushd keytar
+      cd %APPVEYOR_BUILD_FOLDER%\keytar
       npm install
       npm run build
-      popd
   - cmd: |
-      pushd pty
+      cd %APPVEYOR_BUILD_FOLDER%\pty
       npm install
       npm run tsc
       npm run build
-      popd
 
 test_script:
   - cmd: |
-      pushd ctags
+      cd %APPVEYOR_BUILD_FOLDER%\ctags
       IF NOT DEFINED ELECTRON (npm test)
       node_modules/.bin/node-pre-gyp package testpackage
-      popd
   - cmd: |
-      pushd fuzzy-native
+      cd %APPVEYOR_BUILD_FOLDER%\fuzzy-native
       IF NOT DEFINED ELECTRON (npm test)
       node_modules/.bin/node-pre-gyp package testpackage
-      popd
   - cmd: |
-      pushd keytar
+      cd %APPVEYOR_BUILD_FOLDER%\keytar
       IF NOT DEFINED ELECTRON (npm test)
       node_modules/.bin/node-pre-gyp package testpackage
-      popd
   - cmd: |
-      pushd pty
+      cd %APPVEYOR_BUILD_FOLDER%\pty
       IF NOT DEFINED ELECTRON (npm test)
       node_modules/.bin/node-pre-gyp package testpackage
-      popd
 
 build: off
 
