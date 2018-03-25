@@ -7,7 +7,7 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - g++-4.9
+      - g++-7
       - libsecret-1-dev
 
 matrix:
@@ -15,11 +15,11 @@ matrix:
   include:
     # linux
     - os: linux   # abi 51
-      env: NODE_VERSION="7" CXX="g++-4.9"
+      env: NODE_VERSION="7" CXX="g++-7"
     - os: linux   # abi 53
-      env: NODE_VERSION="7.4" ELECTRON="1.6.5" CXX="g++-4.9"
+      env: NODE_VERSION="7.4" ELECTRON="1.6.5" CXX="g++-7"
     - os: linux   # abi 54
-      env: NODE_VERSION="7.4" ELECTRON="1.7.0" CXX="g++-4.9"
+      env: NODE_VERSION="7.4" ELECTRON="1.7.0" CXX="g++-7"
     # os x x86
     - os: osx     # abi 51
       env: NODE_VERSION="7" CXX="clang"
