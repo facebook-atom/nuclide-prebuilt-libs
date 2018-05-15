@@ -16,6 +16,8 @@ matrix:
     # linux
     - os: linux   # abi 51
       env: NODE_VERSION="7" CXX="g++-7"
+    - os: linux   # abi 57
+      env: NODE_VERSION="8.9.3" CXX="g++-7"
     - os: linux   # abi 53
       env: NODE_VERSION="7.4" ELECTRON="1.6.5" CXX="g++-7"
     - os: linux   # abi 54
@@ -23,6 +25,8 @@ matrix:
     # os x x86
     - os: osx     # abi 51
       env: NODE_VERSION="7" CXX="clang"
+    - os: osx     # abi 57
+      env: NODE_VERSION="8.9.3" CXX="clang"
     - os: osx     # abi 53
       env: NODE_VERSION="7.4" ELECTRON="1.6.5" CXX="clang"
     - os: osx     # abi 54
