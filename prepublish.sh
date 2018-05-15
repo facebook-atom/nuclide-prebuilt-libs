@@ -15,14 +15,17 @@ TARGETS=(
   "--target_platform=linux --runtime=electron --target=1.6.5"
   "--target_platform=linux --runtime=electron --target=1.7.0"
   "--target_platform=linux --runtime=node --target=7.0.0"
+  "--target_platform=linux --runtime=node --target=8.9.3"
 
   "--target_platform=darwin --runtime=electron --target=1.6.5"
   "--target_platform=darwin --runtime=electron --target=1.7.0"
   "--target_platform=darwin --runtime=node --target=7.0.0"
+  "--target_platform=darwin --runtime=node --target=8.9.3"
 
   "--target_platform=win32 --runtime=electron --target=1.6.5"
   "--target_platform=win32 --runtime=electron --target=1.7.0"
   "--target_platform=win32 --runtime=node --target=7.0.0"
+  "--target_platform=win32 --runtime=node --target=8.9.3"
 )
 
 MODULE_NAMES=(
