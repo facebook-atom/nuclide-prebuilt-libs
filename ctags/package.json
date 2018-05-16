@@ -14,12 +14,12 @@
   "devDependencies": {
     "jasmine-node": "^1.14.5",
     "nan": "^2.0.0",
-    "node-pre-gyp": "^0.6.5"
+    "node-pre-gyp": "^0.10.0"
   },
   "binary": {
     "module_name": "ctags",
     "module_path": "./build/{module_name}-v{version}-{node_abi}-{platform}-{arch}/",
-    "host": "",
+    "host": "localhost",
     "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz"
   },
   "private": true
