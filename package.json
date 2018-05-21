@@ -23,7 +23,7 @@
   "main": "./index.js",
   "repository": "https://github.com/facebook-atom/nuclide-prebuilt-libs",
   "scripts": {
-    "prepublish": "./prepublish.sh",
+    "prepublishOnly": "./prepublish.sh",
     "test-ctags": "(cd ctags && npm install && npm run rebuild)",
     "test-fuzzy-native": "(cd fuzzy-native && npm install && npm run rebuild)",
     "test-keytar": "(cd keytar && npm install && npm run rebuild)",
