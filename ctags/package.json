@@ -1,7 +1,7 @@
 {
   "name": "ctags",
   "description": "A package for reading source code tag files prebuilt for Mac and Linux",
-  "version": "0.2.3",
+  "version": "0.0.0",
   "license": "SEE LICENSE IN LICENSE",
   "main": "lib/ctags.js",
   "scripts": {
@@ -18,9 +18,9 @@
   },
   "binary": {
     "module_name": "ctags",
-    "module_path": "./build/{module_name}-v{version}-{node_abi}-{platform}-{arch}/",
+    "module_path": "./build/{module_name}-{node_abi}-{platform}-{arch}/",
     "host": "localhost",
-    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz"
+    "package_name": "{module_name}-{node_abi}-{platform}-{arch}.tar.gz"
   },
   "private": true
 }

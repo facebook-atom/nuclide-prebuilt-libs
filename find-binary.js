@@ -36,7 +36,6 @@ module.exports = function findBinary(packageJsonPath) {
 
   var modulePath = pack.binary.module_path
     .replace('{module_name}', pack.binary.module_name)
-    .replace('{version}', pack.version)
     .replace('{node_abi}', nodeAbi)
     .replace('{platform}', process.platform)
     .replace('{arch}', process.arch);

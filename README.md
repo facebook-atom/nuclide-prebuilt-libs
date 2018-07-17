@@ -16,12 +16,11 @@ const ptyjs = require('nuclide-prebuilt-libs/pty');
 
 ## Publishing `nuclide-prebuilt-libs`
 
-1. Bump the `version` in the sub-package you modified. (This is only for bookkeeping purposes).
-2. Run `npm version patch`.
-3. Push the base package version bump and release tag with `git push --follow-tags`.
-4. Wait for both Travis and AppVeyor to build and upload the release artifacts.
-5. To test your npm release: Run `./prepublish && npm pack`
-6. Run `npm publish`.
+1. Run `npm version patch`.
+2. Push the base package version bump and release tag with `git push --follow-tags`.
+3. Wait for both Travis and AppVeyor to build and upload the release artifacts.
+4. To test your npm release: Run `./prepublish && npm pack`
+5. Run `npm publish`.
 
 ## Things to know about sub-packages
 

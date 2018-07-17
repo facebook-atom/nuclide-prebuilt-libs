@@ -2,7 +2,7 @@
   "main": "./lib/keytar.js",
   "name": "keytar",
   "description": "Bindings to native Mac/Linux/Windows password APIs",
-  "version": "4.0.4",
+  "version": "0.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -42,9 +42,9 @@
   },
   "binary": {
     "module_name": "keytar",
-    "module_path": "./build/{module_name}-v{version}-{node_abi}-{platform}-{arch}/",
+    "module_path": "./build/{module_name}-{node_abi}-{platform}-{arch}/",
     "host": "localhost",
-    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz"
+    "package_name": "{module_name}-{node_abi}-{platform}-{arch}.tar.gz"
   },
   "private": true
 }

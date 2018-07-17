@@ -1,6 +1,6 @@
 {
   "name": "fuzzy-native",
-  "version": "0.7.2",
+  "version": "0.0.0",
   "description": "Native C++ implementation of a fuzzy string matcher.",
   "main": "lib/main.js",
   "scripts": {
@@ -26,9 +26,9 @@
   },
   "binary": {
     "module_name": "fuzzy-native",
-    "module_path": "./build/{module_name}-v{version}-{node_abi}-{platform}-{arch}/",
+    "module_path": "./build/{module_name}-{node_abi}-{platform}-{arch}/",
     "host": "localhost",
-    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}.tar.gz"
+    "package_name": "{module_name}-{node_abi}-{platform}-{arch}.tar.gz"
   },
   "private": true
 }
