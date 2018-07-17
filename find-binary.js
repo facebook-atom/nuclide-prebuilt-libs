@@ -6,7 +6,7 @@ var path = require('path');
 module.exports = function findBinary(packageJsonPath) {
   var pack = JSON.parse(fs.readFileSync(packageJsonPath));
 
-  // ABI versions 49, 50, 53 are only for Electron.
+  // Certain ABI versions are Electron-only.
   // https://github.com/electron/electron/issues/5851
   var nodeAbi;
   switch (process.versions.modules) {
@@ -22,6 +22,14 @@ module.exports = function findBinary(packageJsonPath) {
     case '54':
       nodeAbi = 'electron-v1.7';
       break;
+    case '57':
+      // On Windows, we still need a custom build for Electron.
+      // On other platforms, the same build works on both.
+      if (process.platform === 'win32' && process.versions.electron) {
+        nodeAbi = 'electron-v2.0';
+        break;
+      }
+      // intentional fallthrough
     default:
       nodeAbi = 'node-v' + process.versions.modules;
   }
