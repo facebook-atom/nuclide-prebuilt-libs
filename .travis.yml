@@ -20,6 +20,8 @@ matrix:
       env: NODE_VERSION="8.9.3" CXX="g++-7"
     - os: linux   # abi 54
       env: NODE_VERSION="7.4" ELECTRON="1.7.0" CXX="g++-7"
+    - os: linux   # abi 64
+      env: NODE_VERSION="10.2.0" CXX="g++-7"
     # os x x86
     - os: osx     # abi 51
       env: NODE_VERSION="7" CXX="clang"
@@ -27,6 +29,8 @@ matrix:
       env: NODE_VERSION="8.9.3" CXX="clang"
     - os: osx     # abi 54
       env: NODE_VERSION="7.4" ELECTRON="1.7.0" CXX="clang"
+    - os: osx     # abi 64
+      env: NODE_VERSION="10.2.0" CXX="clang"
 
 before_install:
   - rm -rf ~/.nvm/ && git clone --depth 1 "https://github.com/creationix/nvm.git" ~/.nvm
