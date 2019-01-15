@@ -23,7 +23,13 @@ module.exports = function findBinary(packageJsonPath) {
       nodeAbi = 'electron-v1.7';
       break;
     case '64':
-      nodeAbi = 'electron-v3.0';
+      if (process.versions.electron) {
+        // Electron 3 and Node 10 both use abi 64, but they're slightly incompatible.
+        // See: https://github.com/electron/electron/issues/14167
+        nodeAbi = 'electron-v3.0';
+      } else {
+        nodeAbi = 'node-v' + process.versions.modules;
+      }
       break;
     case '57':
       // On Windows, we still need a custom build for Electron.
