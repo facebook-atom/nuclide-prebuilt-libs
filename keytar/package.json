@@ -22,12 +22,6 @@
     "vault",
     "credential vault"
   ],
-  "files": [
-    "lib",
-    "src",
-    "binding.gyp",
-    "keytar.d.ts"
-  ],
   "types": "./keytar.d.ts",
   "scripts": {
     "preinstall": "node -e 'process.exit(0)'",
