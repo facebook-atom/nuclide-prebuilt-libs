@@ -22,6 +22,9 @@ module.exports = function findBinary(packageJsonPath) {
     case '54':
       nodeAbi = 'electron-v1.7';
       break;
+    case '64':
+      nodeAbi = 'electron-v3.0';
+      break;
     case '57':
       // On Windows, we still need a custom build for Electron.
       // On other platforms, the same build works on both.
@@ -30,9 +33,6 @@ module.exports = function findBinary(packageJsonPath) {
         break;
       }
       // intentional fallthrough
-    case '64':
-      nodeAbi = 'electron-v3.0';
-      break;
     default:
       nodeAbi = 'node-v' + process.versions.modules;
   }
