@@ -30,6 +30,9 @@ module.exports = function findBinary(packageJsonPath) {
         break;
       }
       // intentional fallthrough
+    case '64':
+      nodeAbi = 'electron-v3.0';
+      break;
     default:
       nodeAbi = 'node-v' + process.versions.modules;
   }
