@@ -51,5 +51,11 @@ module.exports = {
     checkRequired(service, 'Service')
 
     return callbackPromise(callback => keytar.findPassword(service, callback))
+  },
+
+  findCredentials: function (service) {
+    checkRequired(service, 'Service')
+
+    return callbackPromise(callback => keytar.findCredentials(service, callback))
   }
 }

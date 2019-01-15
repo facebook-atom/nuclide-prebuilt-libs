@@ -1,6 +1,9 @@
 # keytar - Node module to manage system keychain
 
-**NOTE: Forked from https://github.com/atom/node-keytar**
+**NOTE: Forked from https://github.com/atom/node-keytar** (4.3.0 - c10e1506a9825c0c386b1e807a4ab23de543accb)
+[![Travis Build Status](https://travis-ci.org/atom/node-keytar.svg?branch=master)](https://travis-ci.org/atom/node-keytar)
+[![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/atom/node-keytar?svg=true)](https://ci.appveyor.com/project/Atom/node-keytar)
+[![Dependency Status](https://david-dm.org/atom/node-keytar.svg)](https://david-dm.org/atom/node-keytar)
 
 A native Node module to get, add, replace, and delete passwords in system's keychain. On macOS the passwords are managed by the Keychain, on Linux they are managed by the Secret Service API/libsecret, and on Windows they are managed by Credential Vault.
 
@@ -73,3 +76,11 @@ Find a password for the `service` in the keychain.
 `service` - The string service name.
 
 Yields the string password, or `null` if an entry for the given service and account was not found.
+
+### findCredentials(service)
+
+Find all accounts and password for the `service` in the keychain.
+
+`service` - The string service name.
+
+Yields an array of `{ account: 'foo', password: 'bar' }`.

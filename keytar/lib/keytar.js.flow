@@ -17,3 +17,5 @@ declare export function deletePassword(
 ): Promise<boolean>;
 
 declare export function findPassword(service: string): Promise<?string>;
+
+declare export function findCredentials(service: string): Promise<Array<{account: string, password: string}>>;

@@ -16,6 +16,7 @@
     "keytar/build/keytar-*",
     "keytar/lib",
     "keytar/package.json",
+    "keytar/keytar.d.ts",
     "pty/build/pty-*",
     "pty/lib",
     "pty/package.json"
