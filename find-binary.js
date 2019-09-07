@@ -24,6 +24,7 @@ module.exports = function findBinary(packageJsonPath) {
       nodeAbi = 'electron-v1.7';
       break;
     case '64':
+    case '69':
       // Electron 3 and Node 10 both use abi 64, but they're slightly incompatible.
       // See: https://github.com/electron/electron/issues/14167
       if (process.versions.electron) {
