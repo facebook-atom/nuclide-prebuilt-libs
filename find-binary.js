@@ -32,6 +32,9 @@ module.exports = function findBinary(packageJsonPath) {
         nodeAbi = 'node-v' + process.versions.modules;
       }
       break;
+    case '69':
+      nodeAbi = 'electron-v4.0';
+      break;
     case '57':
       // On Windows, we still need a custom build for Electron.
       // On other platforms, the same build works on both.
