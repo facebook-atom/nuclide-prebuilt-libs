@@ -3,7 +3,7 @@
 #include "tag-finder.h"
 #include "tag-reader.h"
 
-void Tags::Init(Handle<Object> target) {
+void Tags::Init(v8::Handle<Object> target) {
   Nan::HandleScope handle_scope;
 
   Local<FunctionTemplate> newTemplate = Nan::New<FunctionTemplate>(Tags::New);
@@ -62,7 +62,7 @@ NAN_METHOD(Tags::FindTags) {
   info.GetReturnValue().SetUndefined();
 }
 
-Tags::Tags(Handle<String> path) {
+Tags::Tags(v8::Handle<String> path) {
   Nan::HandleScope handle_scope;
 
   std::string filePath(*String::Utf8Value(path));
