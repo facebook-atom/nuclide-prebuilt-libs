@@ -21,7 +21,7 @@
   "dependencies": {},
   "devDependencies": {
     "jasmine-node": "^1.14.5",
-    "nan": "^2.14.0",
+    "nan": "^2.8.0",
     "node-pre-gyp": "^0.10.0"
   },
   "binary": {
