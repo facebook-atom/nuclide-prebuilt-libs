@@ -73,8 +73,8 @@ public:
     SetPrototypeMethod(tpl, "removeCandidates", RemoveCandidates);
     SetPrototypeMethod(tpl, "setCandidates", SetCandidates);
 
-    MatcherConstructor.Reset(tpl->GetFunction());
-    exports->Set(Nan::New("Matcher").ToLocalChecked(), tpl->GetFunction());
+    MatcherConstructor.Reset(tpl->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    exports->Set(Nan::New("Matcher").ToLocalChecked(), tpl->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
   }
 
   static void Create(const Nan::FunctionCallbackInfo<v8::Value> &info) {
