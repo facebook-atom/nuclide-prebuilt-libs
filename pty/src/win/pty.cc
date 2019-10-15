@@ -25,7 +25,7 @@ using namespace node;
 /**
 * Misc
 */
-extern "C" void init(Handle<Object>);
+extern "C" void init(v8::Local<Object>);
 
 #define WINPTY_DBG_VARIABLE TEXT("WINPTYDBG")
 #define MAX_ENV 65536
@@ -155,7 +155,7 @@ static NAN_METHOD(PtyStartProcess) {
 
   // create environment block
   std::wstring env;
-  const Handle<Array> envValues = Handle<Array>::Cast(info[2]);
+  const v8::Local<Array> envValues = v8::Local<Array>::Cast(info[2]);
   if(!envValues.IsEmpty()) {
 
     std::wstringstream envBlock;
@@ -323,7 +323,7 @@ static NAN_METHOD(PtyKill) {
 * Init
 */
 
-extern "C" void init(Handle<Object> target) {
+extern "C" void init(v8::Local<Object> target) {
   Nan::HandleScope scope;
   Nan::SetMethod(target, "startProcess", PtyStartProcess);
   Nan::SetMethod(target, "resize", PtyResize);
