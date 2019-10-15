@@ -9,7 +9,7 @@ using namespace v8;  // NOLINT
 
 class Tags : public node::ObjectWrap {
  public:
-  static void Init(Handle<Object> target);
+  static void Init(v8::Local<Object> target);
 
  private:
   static NAN_METHOD(End);
@@ -20,7 +20,7 @@ class Tags : public node::ObjectWrap {
 
   static tagFile* GetFile(v8::Local<v8::Object> obj);
 
-  explicit Tags(Handle<String> path);
+  explicit Tags(v8::Local<String> path);
   ~Tags() {
     if (file != NULL) {
       tagsClose(file);
