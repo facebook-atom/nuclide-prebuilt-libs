@@ -35,7 +35,7 @@ module.exports = function findBinary(packageJsonPath) {
     case '69':
       nodeAbi = 'electron-v4.2';
       break;
-    case '76':
+    case '73':
       nodeAbi = 'electron-v6.0';
       break;
     case '57':
