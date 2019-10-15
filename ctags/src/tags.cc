@@ -17,7 +17,7 @@ void Tags::Init(v8::Local<Object> target) {
   Nan::SetMethod(proto, "getTags", Tags::GetTags);
 
   target->Set(Nan::New<String>("Tags").ToLocalChecked(),
-              newTemplate->GetFunction(Nan::GetCurrentContext())->ToLocalChecked());
+              newTemplate->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }
 
 NODE_MODULE(ctags, Tags::Init)
