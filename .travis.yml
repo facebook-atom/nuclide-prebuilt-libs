@@ -99,6 +99,7 @@ script:
   - |
     pushd pty
       [[ -z "$ELECTRON" ]] && npm test
+      node-pre-gyp rebuild
       node-pre-gyp package testpackage
     popd
 
