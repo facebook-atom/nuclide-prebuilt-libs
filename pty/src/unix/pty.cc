@@ -724,16 +724,16 @@ NAN_MODULE_INIT(init) {
   Nan::HandleScope scope;
   Nan::Set(target,
     Nan::New<String>("fork").ToLocalChecked(),
-    Nan::New<FunctionTemplate>(PtyFork)->GetFunction());
+    Nan::New<FunctionTemplate>(PtyFork)->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
   Nan::Set(target,
     Nan::New<String>("open").ToLocalChecked(),
-    Nan::New<FunctionTemplate>(PtyOpen)->GetFunction());
+    Nan::New<FunctionTemplate>(PtyOpen)->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
   Nan::Set(target,
     Nan::New<String>("resize").ToLocalChecked(),
-    Nan::New<FunctionTemplate>(PtyResize)->GetFunction());
+    Nan::New<FunctionTemplate>(PtyResize)->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
   Nan::Set(target,
     Nan::New<String>("process").ToLocalChecked(),
-    Nan::New<FunctionTemplate>(PtyGetProc)->GetFunction());
+    Nan::New<FunctionTemplate>(PtyGetProc)->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
 }
 
 NODE_MODULE(pty, init)
