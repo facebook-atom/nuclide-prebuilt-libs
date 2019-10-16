@@ -14,35 +14,35 @@ matrix:
   # abi versions https://github.com/mapbox/node-pre-gyp/blob/master/lib/util/abi_crosswalk.json
   include:
     # linux
-    - os: linux   # abi 51
-      env: NODE_VERSION="7" CXX="g++-7"
-    - os: linux   # abi 57
-      env: NODE_VERSION="8.9.3" CXX="g++-7"
-    - os: linux   # abi 54
-      env: NODE_VERSION="7.4" ELECTRON="1.7.0" CXX="g++-7"
-    - os: linux   # abi 64 (vscode 1.31)
-      env: NODE_VERSION="10.13.0" CXX="g++-7" ELECTRON="3.0.13"
-    - os: linux   # abi 64
-      env: NODE_VERSION="10.13.0" CXX="g++-7"
-    - os: linux   # abi 69 (vscode 1.36)
-      env: NODE_VERSION="10.11.0" CXX="g++-7" ELECTRON="4.2.9"
-    - os: linux   # abi 73 (vscode 1.39.1)
-      env: NODE_VERSION="12.4.0" CXX="g++-7" ELECTRON="6.0.9"
+    # - os: linux   # abi 51
+    #   env: NODE_VERSION="7" CXX="g++-7"
+    # - os: linux   # abi 57
+    #   env: NODE_VERSION="8.9.3" CXX="g++-7"
+    # - os: linux   # abi 54
+    #   env: NODE_VERSION="7.4" ELECTRON="1.7.0" CXX="g++-7"
+    # - os: linux   # abi 64 (vscode 1.31)
+    #   env: NODE_VERSION="10.13.0" CXX="g++-7" ELECTRON="3.0.13"
+    # - os: linux   # abi 64
+    #   env: NODE_VERSION="10.13.0" CXX="g++-7"
+    # - os: linux   # abi 69 (vscode 1.36)
+    #   env: NODE_VERSION="10.11.0" CXX="g++-7" ELECTRON="4.2.9"
+    # - os: linux   # abi 73 (vscode 1.39.1)
+    #   env: NODE_VERSION="12.4.0" CXX="g++-7" ELECTRON="6.0.9"
     # os x x86
-    - os: osx     # abi 51
-      env: NODE_VERSION="7" CXX="clang"
-    - os: osx     # abi 57
-      env: NODE_VERSION="8.9.3" CXX="clang"
+    # - os: osx     # abi 51
+    #   env: NODE_VERSION="7" CXX="clang"
+    # - os: osx     # abi 57
+    #   env: NODE_VERSION="8.9.3" CXX="clang"
     - os: osx     # abi 54
       env: NODE_VERSION="7.4" ELECTRON="1.7.0" CXX="clang"
-    - os: osx   # abi 64 (vscode 1.31)
-      env: NODE_VERSION="10.13.0" CXX="clang" ELECTRON="3.0.13"
-    - os: osx     # abi 64
-      env: NODE_VERSION="10.13.0" CXX="clang"
-    - os: osx   # abi 69 (vscode 1.36)
-      env: NODE_VERSION="10.11.0" CXX="clang" ELECTRON="4.2.9"
-    - os: osx   # abi 73 (vscode 1.39.1)
-      env: NODE_VERSION="12.4.0" CXX="clang" ELECTRON="6.0.9"
+    # - os: osx   # abi 64 (vscode 1.31)
+    #   env: NODE_VERSION="10.13.0" CXX="clang" ELECTRON="3.0.13"
+    # - os: osx     # abi 64
+    #   env: NODE_VERSION="10.13.0" CXX="clang"
+    # - os: osx   # abi 69 (vscode 1.36)
+    #   env: NODE_VERSION="10.11.0" CXX="clang" ELECTRON="4.2.9"
+    # - os: osx   # abi 73 (vscode 1.39.1)
+    #   env: NODE_VERSION="12.4.0" CXX="clang" ELECTRON="6.0.9"
 
 before_install:
   - rm -rf ~/.nvm/ && git clone --depth 1 "https://github.com/creationix/nvm.git" ~/.nvm
@@ -94,6 +94,7 @@ script:
   - |
     pushd keytar
       [[ -z "$ELECTRON" ]] && npm test
+      node-pre-gyp rebuild
       node-pre-gyp package testpackage
     popd
   - |
