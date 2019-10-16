@@ -36,19 +36,19 @@ install:
       }
   - cmd: |
       cd %APPVEYOR_BUILD_FOLDER%\ctags
-      npm install
+      npm install --force
       npm run build
   - cmd: |
       cd %APPVEYOR_BUILD_FOLDER%\fuzzy-native
-      npm install
+      npm install --force
       npm run build
   - cmd: |
       cd %APPVEYOR_BUILD_FOLDER%\keytar
-      npm install
+      npm install --force
       npm run build
   - cmd: |
       cd %APPVEYOR_BUILD_FOLDER%\pty
-      npm install
+      npm install --force
       npm run tsc
       npm run build
 
