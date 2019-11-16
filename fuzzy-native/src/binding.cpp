@@ -31,7 +31,7 @@ T get_property(const v8::Local<v8::Object> &object, const char *name) {
  */
 std::string to_std_string(const v8::Local<v8::String> &v8str) {
   std::string str(v8str->Utf8Length(), ' ');
-  v8str->WriteUtf8(&str[0]);
+  v8str->WriteUtf8(Isolate::GetCurrent(), &str[0]);
   return str;
 }
 
@@ -51,7 +51,7 @@ std::string get_string_property(const v8::Local<v8::Object> &object,
         std::string(" must be a string");
       ThrowTypeError(msg.c_str());
     }
-    return to_std_string(propLocal->ToString());
+    return to_std_string(propLocal->ToString(Nan::GetCurrentContext()));
   }
   return std::string("");
 }
@@ -92,7 +92,7 @@ public:
     }
 
     CHECK(info[0]->IsString(), "First argument should be a query string");
-    std::string query(to_std_string(info[0]->ToString()));
+    std::string query(to_std_string(info[0]->ToString(Nan::GetCurrentContext())));
 
     MatcherOptions options;
     if (info.Length() > 1) {
