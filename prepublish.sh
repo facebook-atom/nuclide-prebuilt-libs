@@ -40,7 +40,6 @@ TARGETS=(
 )
 
 MODULE_NAMES=(
-  "ctags"
   "fuzzy-native"
   "keytar"
   "pty"
