@@ -63,11 +63,6 @@ install:
       export npm_config_build_from_source=true;
     fi
   - |
-    pushd ctags
-      npm install
-      npm run build
-    popd
-  - |
     pushd fuzzy-native
       npm install
       npm run build
@@ -85,11 +80,6 @@ install:
     popd
 
 script:
-  - |
-    pushd ctags
-      [[ -z "$ELECTRON" ]] && npm test
-      node-pre-gyp package testpackage
-    popd
   - |
     pushd fuzzy-native
       [[ -z "$ELECTRON" ]] && npm test
