@@ -29,7 +29,7 @@ matrix:
     - os: linux   # abi 73 (vscode 1.39.1)
       env: NODE_VERSION="12.4.0" CXX="g++-7" ELECTRON="6.0.9"
     - os: linux   # abi 72
-      env: NODE_VERSION="12.13.0" CXX="g++-7"
+      env: NODE_VERSION="12.4.0" CXX="g++-7"
     # os x x86
     - os: osx     # abi 51
       env: NODE_VERSION="7" CXX="clang"
@@ -46,7 +46,7 @@ matrix:
     - os: osx   # abi 73 (vscode 1.39.1)
       env: NODE_VERSION="12.4.0" CXX="clang" ELECTRON="6.0.9"
     - os: osx   # abi 72
-      env: NODE_VERSION="12.13.0" CXX="clang"
+      env: NODE_VERSION="12.4.0" CXX="clang"
 
 before_install:
   - rm -rf ~/.nvm/ && git clone --depth 1 "https://github.com/creationix/nvm.git" ~/.nvm
