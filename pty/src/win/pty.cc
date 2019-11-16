@@ -200,7 +200,7 @@ open:
 #if NODE_MODULE_VERSION >= 72
   int cols = info[4]->Int32Value(Nan::GetCurrentContext()).ToChecked();
   int rows = info[5]->Int32Value(Nan::GetCurrentContext()).ToChecked();
-  bool debug = info[6]->ToBoolean(Nan::GetCurrentContext()).ToChecked()->IsTrue();
+  bool debug = info[6]->ToBoolean(Nan::GetCurrentContext()).ToCheckedLocal()->IsTrue();
 #else
   int cols = info[4]->Int32Value();
   int rows = info[5]->Int32Value();
