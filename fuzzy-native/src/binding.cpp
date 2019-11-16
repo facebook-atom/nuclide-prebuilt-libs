@@ -30,8 +30,8 @@ T get_property(const v8::Local<v8::Object> &object, const char *name) {
  * This saves one string copy over using v8::String::Utf8Value.
  */
 std::string to_std_string(const v8::Local<v8::String> &v8str) {
-#ifdef NODE_MODULE_VERSION >= 72
 #pragma message(NODE_MODULE_VERSION)
+#ifdef NODE_MODULE_VERSION >= 72
   std::string str(v8str->Utf8Length(v8::Isolate::GetCurrent()), ' ');
   v8str->WriteUtf8(v8::Isolate::GetCurrent(), &str[0]);
 #else
