@@ -15,6 +15,7 @@ environment:
       ELECTRON: "4.2.9"
     - nodejs_version: "12.4.0"
       ELECTRON: "6.0.9"
+    - nodejs_version: "12.4.0"
 
 matrix:
   fast_finish: true
@@ -35,10 +36,6 @@ install:
         $env:npm_config_build_from_source="true"
       }
   - cmd: |
-      cd %APPVEYOR_BUILD_FOLDER%\ctags
-      npm install --force
-      npm run build
-  - cmd: |
       cd %APPVEYOR_BUILD_FOLDER%\fuzzy-native
       npm install --force
       npm run build
@@ -53,10 +50,6 @@ install:
       npm run build
 
 test_script:
-  - cmd: |
-      cd %APPVEYOR_BUILD_FOLDER%\ctags
-      IF NOT DEFINED ELECTRON (npm test)
-      node_modules/.bin/node-pre-gyp package testpackage
   - cmd: |
       cd %APPVEYOR_BUILD_FOLDER%\fuzzy-native
       IF NOT DEFINED ELECTRON (npm test)
