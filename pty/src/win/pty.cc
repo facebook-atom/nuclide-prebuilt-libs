@@ -296,9 +296,15 @@ static NAN_METHOD(PtyResize) {
     return Nan::ThrowError("Usage: pty.resize(pid, cols, rows)");
   }
 
+#if NODE_MODULE_VERSION >= 72
+  int handle = info[0]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+  int cols = info[1]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+  int rows = info[2]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+#else
   int handle = info[0]->Int32Value();
   int cols = info[1]->Int32Value();
   int rows = info[2]->Int32Value();
+#endif
 
   winpty_t *pc = get_pipe_handle(handle);
 
