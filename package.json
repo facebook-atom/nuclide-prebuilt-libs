@@ -6,9 +6,6 @@
   "homepage": "https://nuclide.io/",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
-    "ctags/build/ctags-*",
-    "ctags/lib",
-    "ctags/package.json",
     "fuzzy-native/build/fuzzy-native-*",
     "fuzzy-native/lib",
     "fuzzy-native/package.json",
@@ -25,11 +22,10 @@
   "repository": "https://github.com/facebook-atom/nuclide-prebuilt-libs",
   "scripts": {
     "prepublishOnly": "./prepublish.sh",
-    "test-ctags": "(cd ctags && npm install && npm run rebuild)",
     "test-fuzzy-native": "(cd fuzzy-native && npm install && npm run rebuild)",
     "test-keytar": "(cd keytar && npm install && npm run rebuild)",
     "test-pty": "(cd pty && npm install && npm run rebuild)",
-    "test": "npm run test-ctags && npm run test-fuzzy-native && npm run test-pty"
+    "test": "npm run test-fuzzy-native && npm run test-pty"
   },
   "dependencies": {},
   "devDependencies": {}
