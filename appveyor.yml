@@ -51,10 +51,6 @@ install:
 
 test_script:
   - cmd: |
-      cd %APPVEYOR_BUILD_FOLDER%\ctags
-      IF NOT DEFINED ELECTRON (npm test)
-      node_modules/.bin/node-pre-gyp package testpackage
-  - cmd: |
       cd %APPVEYOR_BUILD_FOLDER%\fuzzy-native
       IF NOT DEFINED ELECTRON (npm test)
       node_modules/.bin/node-pre-gyp package testpackage
