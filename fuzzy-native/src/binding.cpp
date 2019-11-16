@@ -57,7 +57,7 @@ std::string get_string_property(const v8::Local<v8::Object> &object,
       ThrowTypeError(msg.c_str());
     }
 #ifdef NODE_MODULE_VERSION >= 72
-    return to_std_string(propLocal->ToString(Nan::GetCurrentContext().ToLocalChecked()));
+    return to_std_string(propLocal->ToString(Nan::GetCurrentContext())ToLocalChecked());
 #else
     return to_std_string(propLocal->ToString());
 #endif
