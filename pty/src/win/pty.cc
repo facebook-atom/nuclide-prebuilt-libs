@@ -149,9 +149,15 @@ static NAN_METHOD(PtyStartProcess) {
 
   std::stringstream why;
 
+#if NODE_MODULE_VERSION >= 72
+  const wchar_t *filename = to_wstring(String::Utf8Value(v8::Isolate::GetCurrent(), info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+  const wchar_t *cmdline = to_wstring(String::Utf8Value(v8::Isolate::GetCurrent(), info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+  const wchar_t *cwd = to_wstring(String::Utf8Value(v8::Isolate::GetCurrent(), info[3]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+#else
   const wchar_t *filename = to_wstring(String::Utf8Value(info[0]->ToString()));
   const wchar_t *cmdline = to_wstring(String::Utf8Value(info[1]->ToString()));
   const wchar_t *cwd = to_wstring(String::Utf8Value(info[3]->ToString()));
+#endif
 
   // create environment block
   std::wstring env;
@@ -161,7 +167,11 @@ static NAN_METHOD(PtyStartProcess) {
     std::wstringstream envBlock;
 
     for(uint32_t i = 0; i < envValues->Length(); i++) {
+#if NODE_MODULE_VERSION >= 72
+      std::wstring envValue(to_wstring(String::Utf8Value(v8::Isolate::GetCurrent(), envValues->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked())));
+#else
       std::wstring envValue(to_wstring(String::Utf8Value(envValues->Get(i)->ToString())));
+#endif
       envBlock << envValue << L'\0';
     }
 
@@ -187,9 +197,15 @@ static NAN_METHOD(PtyStartProcess) {
 
 open:
   // Below used to be PtyOpen
+#if NODE_MODULE_VERSION >= 72
+  int cols = info[4]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+  int rows = info[5]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+  bool debug = info[6]->ToBoolean(v8::Isolate::GetCurrent())->IsTrue();
+#else
   int cols = info[4]->Int32Value();
   int rows = info[5]->Int32Value();
   bool debug = info[6]->ToBoolean()->IsTrue();
+#endif
 
   // Enable/disable debugging
   SetEnvironmentVariable(WINPTY_DBG_VARIABLE, debug ? "1" : NULL); // NULL = deletes variable
@@ -280,9 +296,15 @@ static NAN_METHOD(PtyResize) {
     return Nan::ThrowError("Usage: pty.resize(pid, cols, rows)");
   }
 
+#if NODE_MODULE_VERSION >= 72
+  int handle = info[0]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+  int cols = info[1]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+  int rows = info[2]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+#else
   int handle = info[0]->Int32Value();
   int cols = info[1]->Int32Value();
   int rows = info[2]->Int32Value();
+#endif
 
   winpty_t *pc = get_pipe_handle(handle);
 
@@ -307,8 +329,13 @@ static NAN_METHOD(PtyKill) {
     return Nan::ThrowError("Usage: pty.kill(pid, innerPidHandle)");
   }
 
+#if NODE_MODULE_VERSION >= 72
+  int handle = info[0]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+  HANDLE innerPidHandle = (HANDLE)info[1]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+#else
   int handle = info[0]->Int32Value();
   HANDLE innerPidHandle = (HANDLE)info[1]->Int32Value();
+#endif
 
   winpty_t *pc = get_pipe_handle(handle);
 
