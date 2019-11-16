@@ -150,9 +150,9 @@ static NAN_METHOD(PtyStartProcess) {
   std::stringstream why;
 
 #if NODE_MODULE_VERSION >= 72
-  const wchar_t *filename = to_wstring(String::Utf8Value(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
-  const wchar_t *cmdline = to_wstring(String::Utf8Value(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
-  const wchar_t *cwd = to_wstring(String::Utf8Value(info[3]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+  const wchar_t *filename = to_wstring(String::Utf8Value(*(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked())));
+  const wchar_t *cmdline = to_wstring(String::Utf8Value(*(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked())));
+  const wchar_t *cwd = to_wstring(String::Utf8Value(*(info[3]->ToString(Nan::GetCurrentContext()).ToLocalChecked())));
 #else
   const wchar_t *filename = to_wstring(String::Utf8Value(info[0]->ToString()));
   const wchar_t *cmdline = to_wstring(String::Utf8Value(info[1]->ToString()));
