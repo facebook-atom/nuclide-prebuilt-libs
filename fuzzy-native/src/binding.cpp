@@ -110,11 +110,11 @@ public:
     CHECK(info[0]->IsString(), "First argument should be a query string");
 #if NODE_MODULE_VERSION >= 72
     std::string q = to_std_string(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
-    count << q << endl;
+    cout << q << endl;
     std::string query(q);
 #else
     std:string q = to_std_string(info[0]->ToString());
-    count << q << endl;
+    cout << q << endl;
     std::string query(q);
 #endif
 
