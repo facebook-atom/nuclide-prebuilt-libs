@@ -35,7 +35,7 @@ T get_property(const v8::Local<v8::Object> &object, const char *name) {
  */
 std::string to_std_string(const v8::Local<v8::String> &v8str) {
 
-#ifdef defined(NODE_MODULE_VERSION)
+#ifdef !defined(NODE_MODULE_VERSION)
 #pragma message("NODE MODULE VERSION IS NOT DEFINED")
 #endif
 
