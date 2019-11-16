@@ -97,7 +97,7 @@ public:
     MatcherOptions options;
     if (info.Length() > 1) {
       CHECK(info[1]->IsObject(), "Second argument should be an options object");
-      auto options_obj = info[1]->ToObject(Nan::GetCrrentContext());
+      auto options_obj = info[1]->ToObject(Nan::GetCurrentContext());
       options.case_sensitive = get_property<bool>(options_obj, "caseSensitive");
       options.smart_case = get_property<bool>(options_obj, "smartCase");
       options.num_threads = get_property<int>(options_obj, "numThreads");
