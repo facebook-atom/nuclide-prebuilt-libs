@@ -149,9 +149,15 @@ static NAN_METHOD(PtyStartProcess) {
 
   std::stringstream why;
 
+#if NODE_MODULE_VERSION >= 72
+  const wchar_t *filename = to_wstring(String::Utf8Value(info[0]->ToString(Nan::GetCurrentContext())));
+  const wchar_t *cmdline = to_wstring(String::Utf8Value(info[1]->ToString(Nan::GetCurrentContext())));
+  const wchar_t *cwd = to_wstring(String::Utf8Value(info[3]->ToString(Nan::GetCurrentContext())));
+#else
   const wchar_t *filename = to_wstring(String::Utf8Value(info[0]->ToString()));
   const wchar_t *cmdline = to_wstring(String::Utf8Value(info[1]->ToString()));
   const wchar_t *cwd = to_wstring(String::Utf8Value(info[3]->ToString()));
+#endif
 
   // create environment block
   std::wstring env;
@@ -161,7 +167,11 @@ static NAN_METHOD(PtyStartProcess) {
     std::wstringstream envBlock;
 
     for(uint32_t i = 0; i < envValues->Length(); i++) {
+#if NODE_MODULE_VERSION >= 72
+      std::wstring envValue(to_wstring(String::Utf8Value(envValues->Get(i)->ToString(Nan::GetCurrentContext()))));
+#else
       std::wstring envValue(to_wstring(String::Utf8Value(envValues->Get(i)->ToString())));
+#endif
       envBlock << envValue << L'\0';
     }
 
@@ -187,9 +197,15 @@ static NAN_METHOD(PtyStartProcess) {
 
 open:
   // Below used to be PtyOpen
+#if NODE_MODULE_VERSION >= 72
+  int cols = info[4]->Int32Value(Nan::GetCurrentContext());
+  int rows = info[5]->Int32Value(Nan::GetCurrentContext());
+  bool debug = info[6]->ToBoolean(Nan::GetCurrentContext())->IsTrue();
+#else
   int cols = info[4]->Int32Value();
   int rows = info[5]->Int32Value();
   bool debug = info[6]->ToBoolean()->IsTrue();
+#endif
 
   // Enable/disable debugging
   SetEnvironmentVariable(WINPTY_DBG_VARIABLE, debug ? "1" : NULL); // NULL = deletes variable
