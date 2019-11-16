@@ -51,7 +51,7 @@ std::string get_string_property(const v8::Local<v8::Object> &object,
         std::string(" must be a string");
       ThrowTypeError(msg.c_str());
     }
-    return to_std_string(propLocal->ToString(Nan::GetContext()));
+    return to_std_string(propLocal->ToString(Nan::GetCurrentContext()));
   }
   return std::string("");
 }
@@ -92,12 +92,12 @@ public:
     }
 
     CHECK(info[0]->IsString(), "First argument should be a query string");
-    std::string query(to_std_string(info[0]->ToString(Nan::GetContext())));
+    std::string query(to_std_string(info[0]->ToString(Nan::GetCurrentContext())));
 
     MatcherOptions options;
     if (info.Length() > 1) {
       CHECK(info[1]->IsObject(), "Second argument should be an options object");
-      auto options_obj = info[1]->ToObject(Nan::GetContext());
+      auto options_obj = info[1]->ToObject(Nan::GetCrrentContext());
       options.case_sensitive = get_property<bool>(options_obj, "caseSensitive");
       options.smart_case = get_property<bool>(options_obj, "smartCase");
       options.num_threads = get_property<int>(options_obj, "numThreads");
@@ -148,7 +148,7 @@ public:
       }
       matcher->impl_.reserve(matcher->impl_.size() + arg1->Length());
       for (auto i: indexes) {
-        matcher->impl_.addCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetContext())));
+        matcher->impl_.addCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetCurrentContext())));
       }
     }
   }
@@ -159,7 +159,7 @@ public:
       CHECK(info[0]->IsArray(), "Expected an array of strings");
       auto arg1 = v8::Local<v8::Array>::Cast(info[0]);
       for (size_t i = 0; i < arg1->Length(); i++) {
-        matcher->impl_.removeCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetContext())));
+        matcher->impl_.removeCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetCurrentContext())));
       }
     }
   }
