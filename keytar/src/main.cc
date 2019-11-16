@@ -8,9 +8,9 @@ namespace {
 NAN_METHOD(SetPassword) {
   SetPasswordWorker* worker = new SetPasswordWorker(
 #if NODE_MODULE_VERSION >= 72
-    *v8::String::Utf8Value(*info[0]),
-    *v8::String::Utf8Value(*info[1]),
-    *v8::String::Utf8Value(*info[2]),
+    *v8::String::Utf8Value(v8::Isolate::GetCurrent(), info[0]),
+    *v8::String::Utf8Value(v8::Isolate::GetCurrent(), info[1]),
+    *v8::String::Utf8Value(v8::Isolate::GetCurrent(), info[2]),
 #else
     *v8::String::Utf8Value(info[0]),
     *v8::String::Utf8Value(info[1]),
@@ -23,8 +23,8 @@ NAN_METHOD(SetPassword) {
 NAN_METHOD(GetPassword) {
   GetPasswordWorker* worker = new GetPasswordWorker(
 #if NODE_MODULE_VERSION >= 72
-    *v8::String::Utf8Value(*info[0]),
-    *v8::String::Utf8Value(*info[1]),
+    *v8::String::Utf8Value(v8::Isolate::GetCurrent(), info[0]),
+    *v8::String::Utf8Value(v8::Isolate::GetCurrent(), info[1]),
 #else
     *v8::String::Utf8Value(info[0]),
     *v8::String::Utf8Value(info[1]),
@@ -36,8 +36,8 @@ NAN_METHOD(GetPassword) {
 NAN_METHOD(DeletePassword) {
   DeletePasswordWorker* worker = new DeletePasswordWorker(
 #if NODE_MODULE_VERSION >= 72
-    *v8::String::Utf8Value(*info[0]),
-    *v8::String::Utf8Value(*info[1]),
+    *v8::String::Utf8Value(v8::Isolate::GetCurrent(), info[0]),
+    *v8::String::Utf8Value(v8::Isolate::GetCurrent(), info[1]),
 #else
     *v8::String::Utf8Value(info[0]),
     *v8::String::Utf8Value(info[1]),
@@ -49,7 +49,7 @@ NAN_METHOD(DeletePassword) {
 NAN_METHOD(FindPassword) {
   FindPasswordWorker* worker = new FindPasswordWorker(
 #if NODE_MODULE_VERSION >= 72
-    *v8::String::Utf8Value(*info[0]),
+    *v8::String::Utf8Value(v8::Isolate::GetCurrent(), info[0]),
 #else
     *v8::String::Utf8Value(info[0]),
 #endif    
@@ -60,7 +60,7 @@ NAN_METHOD(FindPassword) {
 NAN_METHOD(FindCredentials) {
   FindCredentialsWorker* worker = new FindCredentialsWorker(
 #if NODE_MODULE_VERSION >= 72
-    *v8::String::Utf8Value(*info[0]),
+    *v8::String::Utf8Value(v8::Isolate::GetCurrent(), info[0]),
 #else
     *v8::String::Utf8Value(info[0]),
 #endif    
