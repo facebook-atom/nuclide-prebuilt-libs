@@ -1,3 +1,5 @@
+#include <node_version.h>
+
 #include "nan.h"
 #include "async.h"
 
@@ -5,39 +7,63 @@ namespace {
 
 NAN_METHOD(SetPassword) {
   SetPasswordWorker* worker = new SetPasswordWorker(
+#if NODE_MODULE_VERSION >= 72
+    *v8::String::Utf8Value(*info[0]),
+    *v8::String::Utf8Value(*info[1]),
+    *v8::String::Utf8Value(*info[2]),
+#else
     *v8::String::Utf8Value(info[0]),
     *v8::String::Utf8Value(info[1]),
     *v8::String::Utf8Value(info[2]),
+#endif    
     new Nan::Callback(info[3].As<v8::Function>()));
   Nan::AsyncQueueWorker(worker);
 }
 
 NAN_METHOD(GetPassword) {
   GetPasswordWorker* worker = new GetPasswordWorker(
+#if NODE_MODULE_VERSION >= 72
+    *v8::String::Utf8Value(*info[0]),
+    *v8::String::Utf8Value(*info[1]),
+#else
     *v8::String::Utf8Value(info[0]),
     *v8::String::Utf8Value(info[1]),
+#endif    
     new Nan::Callback(info[2].As<v8::Function>()));
   Nan::AsyncQueueWorker(worker);
 }
 
 NAN_METHOD(DeletePassword) {
   DeletePasswordWorker* worker = new DeletePasswordWorker(
+#if NODE_MODULE_VERSION >= 72
+    *v8::String::Utf8Value(*info[0]),
+    *v8::String::Utf8Value(*info[1]),
+#else
     *v8::String::Utf8Value(info[0]),
     *v8::String::Utf8Value(info[1]),
+#endif    
     new Nan::Callback(info[2].As<v8::Function>()));
   Nan::AsyncQueueWorker(worker);
 }
 
 NAN_METHOD(FindPassword) {
   FindPasswordWorker* worker = new FindPasswordWorker(
+#if NODE_MODULE_VERSION >= 72
+    *v8::String::Utf8Value(*info[0]),
+#else
     *v8::String::Utf8Value(info[0]),
+#endif    
     new Nan::Callback(info[1].As<v8::Function>()));
   Nan::AsyncQueueWorker(worker);
 }
 
 NAN_METHOD(FindCredentials) {
   FindCredentialsWorker* worker = new FindCredentialsWorker(
+#if NODE_MODULE_VERSION >= 72
+    *v8::String::Utf8Value(*info[0]),
+#else
     *v8::String::Utf8Value(info[0]),
+#endif    
     new Nan::Callback(info[1].As<v8::Function>()));
   Nan::AsyncQueueWorker(worker);
 }
