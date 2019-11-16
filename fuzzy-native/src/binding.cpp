@@ -1,3 +1,4 @@
+#include <v8.h>
 #include <nan.h>
 #include <vector>
 #include <unordered_map>
