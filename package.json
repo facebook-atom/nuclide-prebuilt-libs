@@ -6,9 +6,6 @@
   "homepage": "https://nuclide.io/",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
-    "ctags/build/ctags-*",
-    "ctags/lib",
-    "ctags/package.json",
     "fuzzy-native/build/fuzzy-native-*",
     "fuzzy-native/lib",
     "fuzzy-native/package.json",
