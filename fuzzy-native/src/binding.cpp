@@ -37,6 +37,8 @@ std::string to_std_string(const v8::Local<v8::String> &v8str) {
 
 #ifdef !defined(NODE_MODULE_VERSION)
 #pragma message("NODE MODULE VERSION IS NOT DEFINED")
+#else
+#pragma message("NODE MODULE VERSION IS DEFINED")
 #endif
 
 #ifdef defined(NODE_MODULE_VERSION) && (NODE_MODULE_VERSION >= 72)
