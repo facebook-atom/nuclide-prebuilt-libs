@@ -14,6 +14,9 @@ using namespace Nan;
     return;                                                                    \
   }
 
+#pragma message("NODE_MODULE_VERSION")
+#pragma message(NODE_MODULE_VERSION)
+
 template <typename T>
 T get_property(const v8::Local<v8::Object> &object, const char *name) {
   auto prop = Nan::Get(object, Nan::New(name).ToLocalChecked());
