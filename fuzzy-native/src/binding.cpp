@@ -120,7 +120,7 @@ public:
 #if NODE_MODULE_VERSION >= 72
       auto options_obj = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
 #else
-      auto options_obj = info2.tx[1]->ToObject();
+      auto options_obj = info[1]->ToObject();
 #endif
 
       options.case_sensitive = get_property<bool>(options_obj, "caseSensitive");
