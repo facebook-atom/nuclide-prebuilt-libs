@@ -150,9 +150,9 @@ static NAN_METHOD(PtyStartProcess) {
   std::stringstream why;
 
 #if NODE_MODULE_VERSION >= 72
-  const wchar_t *filename = to_wstring(String::Utf8Value(*(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked())));
-  const wchar_t *cmdline = to_wstring(String::Utf8Value(*(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked())));
-  const wchar_t *cwd = to_wstring(String::Utf8Value(*(info[3]->ToString(Nan::GetCurrentContext()).ToLocalChecked())));
+  const wchar_t *filename = to_wstring(String::Utf8Value(v8::Isolate::GetCurrent(), info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+  const wchar_t *cmdline = to_wstring(String::Utf8Value(v8::Isolate::GetCurrent(), info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+  const wchar_t *cwd = to_wstring(String::Utf8Value(v8::Isolate::GetCurrent(), info[3]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
 #else
   const wchar_t *filename = to_wstring(String::Utf8Value(info[0]->ToString()));
   const wchar_t *cmdline = to_wstring(String::Utf8Value(info[1]->ToString()));
@@ -168,7 +168,7 @@ static NAN_METHOD(PtyStartProcess) {
 
     for(uint32_t i = 0; i < envValues->Length(); i++) {
 #if NODE_MODULE_VERSION >= 72
-      std::wstring envValue(to_wstring(String::Utf8Value(envValues->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked())));
+      std::wstring envValue(to_wstring(String::Utf8Value(v8::Isolate::GetCurrent(), envValues->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked())));
 #else
       std::wstring envValue(to_wstring(String::Utf8Value(envValues->Get(i)->ToString())));
 #endif
