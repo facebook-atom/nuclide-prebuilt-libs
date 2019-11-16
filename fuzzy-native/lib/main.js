@@ -5,8 +5,9 @@ var binding_path = findBinary(require.resolve('../package.json'));
 
 console.log('Loading Native Lib!');
 console.log('path  = ' + binding_path);
+let nativeResult;
 try {
-    const nativeResult = require(binding_path);
+    nativeResult = require(binding_path);
     console.log('lib = ' + nativeResult);
 } catch (e) {
     console.log('failed ', e);
