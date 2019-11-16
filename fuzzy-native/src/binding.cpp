@@ -2,7 +2,6 @@
 #include <vector>
 #include <unordered_map>
 #include <chrono>
-#include <iostream>
 #include <node_version.h>
 
 #include "MatcherBase.h"
@@ -121,7 +120,7 @@ public:
 #if NODE_MODULE_VERSION >= 72
       auto options_obj = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
 #else
-      auto options_obj = info[1]->ToObject();
+      auto options_obj = info2.tx[1]->ToObject();
 #endif
 
       options.case_sensitive = get_property<bool>(options_obj, "caseSensitive");
@@ -132,14 +131,6 @@ public:
       options.record_match_indexes =
           get_property<bool>(options_obj, "recordMatchIndexes");
       options.root_path = get_string_property(options_obj, "rootPath");
-
-
-      cout << "Case Sensitive: " << options.case_sensitive << endl;
-      cout << "Smart Case " << options.smart_case << endl;
-      cout << "Num Threads " << options.num_threads << endl;
-      cout << "Max Gap " << options.max_gap << endl;
-      cout << "Record Match Indexes " << options.record_match_indexes << endl;
-      cout << "Root Path " << options.root_path << endl;
     }
 
     auto valueKey = New("value").ToLocalChecked();
@@ -198,7 +189,7 @@ public:
       auto arg1 = v8::Local<v8::Array>::Cast(info[0]);
       for (size_t i = 0; i < arg1->Length(); i++) {
 #if NODE_MODULE_VERSION >= 72
-        matcher->impl_.addCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+        matcher->impl_.removeCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
 #else
         matcher->impl_.removeCandidate(to_std_string(arg1->Get(i)->ToString()));
 #endif
