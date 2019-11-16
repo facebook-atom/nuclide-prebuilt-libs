@@ -50,6 +50,9 @@ module.exports = function findBinary(packageJsonPath) {
       nodeAbi = 'node-v' + process.versions.modules;
   }
 
+  console.log('Loading Native Lib!');
+  console.log('node abi = ' + nodeAbi);
+
   var modulePath = pack.binary.module_path
     .replace('{module_name}', pack.binary.module_name)
     .replace('{node_abi}', nodeAbi)
