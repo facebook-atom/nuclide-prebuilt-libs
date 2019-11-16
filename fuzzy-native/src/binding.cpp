@@ -31,7 +31,7 @@ T get_property(const v8::Local<v8::Object> &object, const char *name) {
  * This saves one string copy over using v8::String::Utf8Value.
  */
 std::string to_std_string(const v8::Local<v8::String> &v8str) {
-#ifdef NODE_MODULE_VERSION >= 72
+#ifdef defined(NODE_MODULE_VERSION) && (NODE_MODULE_VERSION >= 72)
   std::string str(v8str->Utf8Length(v8::Isolate::GetCurrent()), ' ');
   v8str->WriteUtf8(v8::Isolate::GetCurrent(), &str[0]);
 #else
@@ -57,7 +57,7 @@ std::string get_string_property(const v8::Local<v8::Object> &object,
         std::string(" must be a string");
       ThrowTypeError(msg.c_str());
     }
-#ifdef NODE_MODULE_VERSION >= 72
+#ifdef defined(NODE_MODULE_VERSION) && (NODE_MODULE_VERSION >= 72)
     return to_std_string(propLocal->ToString(Nan::GetCurrentContext()).ToLocalChecked());
 #else
     return to_std_string(propLocal->ToString());
@@ -102,7 +102,7 @@ public:
     }
 
     CHECK(info[0]->IsString(), "First argument should be a query string");
-#ifdef NODE_MODULE_VERSION >= 72
+#ifdef defined(NODE_MODULE_VERSION) && (NODE_MODULE_VERSION >= 72)
     std::string query(to_std_string(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
 #else
     std::string query(to_std_string(info[0]->ToString()));
@@ -112,7 +112,7 @@ public:
     MatcherOptions options;
     if (info.Length() > 1) {
       CHECK(info[1]->IsObject(), "Second argument should be an options object");
-#ifdef NODE_MODULE_VERSION >= 72
+#ifdef defined(NODE_MODULE_VERSION) && (NODE_MODULE_VERSION >= 72)
       auto options_obj = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
 #else
       auto options_obj = info[1]->ToObject();
@@ -179,7 +179,7 @@ public:
       CHECK(info[0]->IsArray(), "Expected an array of strings");
       auto arg1 = v8::Local<v8::Array>::Cast(info[0]);
       for (size_t i = 0; i < arg1->Length(); i++) {
-#ifdef NODE_MODULE_VERSION >= 72
+#ifdef defined(NODE_MODULE_VERSION) && (NODE_MODULE_VERSION >= 72)
         matcher->impl_.addCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
 #else
         matcher->impl_.removeCandidate(to_std_string(arg1->Get(i)->ToString()));
