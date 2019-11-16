@@ -200,7 +200,7 @@ open:
 #if NODE_MODULE_VERSION >= 72
   int cols = info[4]->Int32Value(Nan::GetCurrentContext()).ToChecked();
   int rows = info[5]->Int32Value(Nan::GetCurrentContext()).ToChecked();
-  bool debug = info[6]->ToBoolean(Nan::GetCurrentContext()).ToCheckedLocal()->IsTrue();
+  bool debug = info[6]->ToBoolean(Nan::GetCurrentContext()).ToLocalChecked()->IsTrue();
 #else
   int cols = info[4]->Int32Value();
   int rows = info[5]->Int32Value();
@@ -329,8 +329,13 @@ static NAN_METHOD(PtyKill) {
     return Nan::ThrowError("Usage: pty.kill(pid, innerPidHandle)");
   }
 
+#if NODE_MODULE_VERSION >= 72
+  int handle = info[0]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+  HANDLE innerPidHandle = (HANDLE)info[1]->Int32Value(Nan::GetCurrentContext()).ToChecked();
+#else
   int handle = info[0]->Int32Value();
   HANDLE innerPidHandle = (HANDLE)info[1]->Int32Value();
+#endif
 
   winpty_t *pc = get_pipe_handle(handle);
 
