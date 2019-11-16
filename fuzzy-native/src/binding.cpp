@@ -57,7 +57,7 @@ std::string get_string_property(const v8::Local<v8::Object> &object,
       ThrowTypeError(msg.c_str());
     }
 #ifdef NODE_MODULE_VERSION >= 72
-    return to_std_string(propLocal->ToString(Nan::GetCurrentContext()));
+    return to_std_string(propLocal->ToString(Nan::GetCurrentContext().ToLocalChecked()));
 #else
     return to_std_string(propLocal->ToString());
 #endif
@@ -102,7 +102,7 @@ public:
 
     CHECK(info[0]->IsString(), "First argument should be a query string");
 #ifdef NODE_MODULE_VERSION >= 72
-    std::string query(to_std_string(info[0]->ToString(Nan::GetCurrentContext())));
+    std::string query(to_std_string(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
 #else
     std::string query(to_std_string(info[0]->ToString()));
 #endif
@@ -174,7 +174,7 @@ public:
       auto arg1 = v8::Local<v8::Array>::Cast(info[0]);
       for (size_t i = 0; i < arg1->Length(); i++) {
 #ifdef NODE_MODULE_VERSION >= 72
-        matcher->impl_.addCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetCurrentContext())));
+        matcher->impl_.addCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
 #else
         matcher->impl_.removeCandidate(to_std_string(arg1->Get(i)->ToString()));
 #endif
