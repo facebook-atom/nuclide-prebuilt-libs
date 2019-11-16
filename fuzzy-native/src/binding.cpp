@@ -112,7 +112,12 @@ public:
     MatcherOptions options;
     if (info.Length() > 1) {
       CHECK(info[1]->IsObject(), "Second argument should be an options object");
+#ifdef NODE_MODULE_VERSION >= 72
+      auto options_obj = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
+#else
       auto options_obj = info[1]->ToObject();
+#endif
+
       options.case_sensitive = get_property<bool>(options_obj, "caseSensitive");
       options.smart_case = get_property<bool>(options_obj, "smartCase");
       options.num_threads = get_property<int>(options_obj, "numThreads");
