@@ -2,11 +2,13 @@
 #include <vector>
 #include <unordered_map>
 #include <chrono>
+#include <iostream>
 #include <node_version.h>
 
 #include "MatcherBase.h"
 
 using namespace Nan;
+using namespace std;
 
 #define CHECK(cond, msg)                                                       \
   if (!(cond)) {                                                               \
@@ -34,12 +36,6 @@ T get_property(const v8::Local<v8::Object> &object, const char *name) {
  * This saves one string copy over using v8::String::Utf8Value.
  */
 std::string to_std_string(const v8::Local<v8::String> &v8str) {
-
-#if !defined(NODE_MODULE_VERSION)
-#pragma message("NODE MODULE VERSION IS NOT DEFINED")
-#else
-#pragma message("NODE MODULE VERSION IS DEFINED")
-#endif
 
 #if NODE_MODULE_VERSION >= 72
   std::string str(v8str->Utf8Length(v8::Isolate::GetCurrent()), ' ');
@@ -113,9 +109,13 @@ public:
 
     CHECK(info[0]->IsString(), "First argument should be a query string");
 #if NODE_MODULE_VERSION >= 72
-    std::string query(to_std_string(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+    std::string q = to_std_string(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+    count << q << endl;
+    std::string query(q);
 #else
-    std::string query(to_std_string(info[0]->ToString()));
+    std:string q = to_std_string(info[0]->ToString());
+    count << q << endl;
+    std::string query(q);
 #endif
 
 
