@@ -14,8 +14,6 @@ matrix:
   # abi versions https://github.com/mapbox/node-pre-gyp/blob/master/lib/util/abi_crosswalk.json
   include:
     # linux
-    - os: linux   # abi 51
-      env: NODE_VERSION="7" CXX="g++-7"
     - os: linux   # abi 57
       env: NODE_VERSION="8.9.3" CXX="g++-7"
     - os: linux   # abi 54
@@ -28,9 +26,9 @@ matrix:
       env: NODE_VERSION="10.11.0" CXX="g++-7" ELECTRON="4.2.9"
     - os: linux   # abi 73 (vscode 1.39.1)
       env: NODE_VERSION="12.4.0" CXX="g++-7" ELECTRON="6.0.9"
+    - os: linux   # abi 72
+      env: NODE_VERSION="12.4.0" CXX="g++-7"
     # os x x86
-    - os: osx     # abi 51
-      env: NODE_VERSION="7" CXX="clang"
     - os: osx     # abi 57
       env: NODE_VERSION="8.9.3" CXX="clang"
     - os: osx     # abi 54
@@ -43,6 +41,8 @@ matrix:
       env: NODE_VERSION="10.11.0" CXX="clang" ELECTRON="4.2.9"
     - os: osx   # abi 73 (vscode 1.39.1)
       env: NODE_VERSION="12.4.0" CXX="clang" ELECTRON="6.0.9"
+    - os: osx   # abi 72
+      env: NODE_VERSION="12.4.0" CXX="clang"
 
 before_install:
   - rm -rf ~/.nvm/ && git clone --depth 1 "https://github.com/creationix/nvm.git" ~/.nvm
@@ -58,11 +58,6 @@ install:
       export npm_config_runtime=electron;
       export npm_config_build_from_source=true;
     fi
-  - |
-    pushd ctags
-      npm install
-      npm run build
-    popd
   - |
     pushd fuzzy-native
       npm install
@@ -81,11 +76,6 @@ install:
     popd
 
 script:
-  - |
-    pushd ctags
-      [[ -z "$ELECTRON" ]] && npm test
-      node-pre-gyp package testpackage
-    popd
   - |
     pushd fuzzy-native
       [[ -z "$ELECTRON" ]] && npm test
