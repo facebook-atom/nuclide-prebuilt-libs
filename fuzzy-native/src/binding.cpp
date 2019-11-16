@@ -132,6 +132,14 @@ public:
       options.record_match_indexes =
           get_property<bool>(options_obj, "recordMatchIndexes");
       options.root_path = get_string_property(options_obj, "rootPath");
+
+
+      cout << "Case Sensitive: " << options.case_sensitive << endl;
+      cout << "Smart Case " << options.smart_case << endl;
+      cout << "Num Threads " << options.num_threads << endl;
+      cout << "Max Gap " << options.max_gap << endl;
+      cout << "Record Match Indexes " << options.record_match_indexes << endl;
+      cout << "Root Path " << options.root_path << endl;
     }
 
     auto valueKey = New("value").ToLocalChecked();
