@@ -165,7 +165,7 @@ NAN_METHOD(PtyFork) {
 
   // file
 #if NODE_MODULE_VERSION >= 72
-  String::Utf8Value file(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+  String::Utf8Value file(v8::Isolate::GetCurrent(), info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
 #else
   String::Utf8Value file(info[0]->ToString());
 #endif
@@ -180,7 +180,7 @@ NAN_METHOD(PtyFork) {
   argv[argl-1] = NULL;
   for (; i < argc; i++) {
 #if NODE_MODULE_VERSION >= 72
-    String::Utf8Value arg(argv_->Get(Nan::New<Integer>(i))->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+    String::Utf8Value arg(v8::Isolate::GetCurrent(), argv_->Get(Nan::New<Integer>(i))->ToString(Nan::GetCurrentContext()).ToLocalChecked());
 #else
     String::Utf8Value arg(argv_->Get(Nan::New<Integer>(i))->ToString());
 #endif
@@ -195,7 +195,7 @@ NAN_METHOD(PtyFork) {
   env[envc] = NULL;
   for (; i < envc; i++) {
 #if NODE_MODULE_VERSION >= 72
-    String::Utf8Value pair(env_->Get(Nan::New<Integer>(i))->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+    String::Utf8Value pair(v8::Isolate::GetCurrent(), env_->Get(Nan::New<Integer>(i))->ToString(Nan::GetCurrentContext()).ToLocalChecked());
 #else
     String::Utf8Value pair(env_->Get(Nan::New<Integer>(i))->ToString());
 #endif
@@ -204,7 +204,7 @@ NAN_METHOD(PtyFork) {
 
   // cwd
 #if NODE_MODULE_VERSION >= 72
-  String::Utf8Value cwd_(info[3]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+  String::Utf8Value cwd_(v8::Isolate::GetCurrent(), info[3]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
 #else
   String::Utf8Value cwd_(info[3]->ToString());
 #endif
@@ -456,7 +456,7 @@ NAN_METHOD(PtyGetProc) {
 #endif
 
 #if NODE_MODULE_VERSION >= 72
-  String::Utf8Value tty_(info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+  String::Utf8Value tty_(v8::Isolate::GetCurrent(), info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
 #else
   String::Utf8Value tty_(info[1]->ToString());
 #endif
