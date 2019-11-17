@@ -164,7 +164,11 @@ NAN_METHOD(PtyFork) {
   signal(SIGINT, SIG_DFL);
 
   // file
+#if NODE_MODULE_VERSION >= 72
+  String::Utf8Value file(info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+#else
   String::Utf8Value file(info[0]->ToString());
+#endif
 
   // args
   int i = 0;
@@ -175,7 +179,11 @@ NAN_METHOD(PtyFork) {
   argv[0] = strdup(*file);
   argv[argl-1] = NULL;
   for (; i < argc; i++) {
+#if NODE_MODULE_VERSION >= 72
+    String::Utf8Value arg(argv_->Get(Nan::New<Integer>(i))->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+#else
     String::Utf8Value arg(argv_->Get(Nan::New<Integer>(i))->ToString());
+#endif
     argv[i+1] = strdup(*arg);
   }
 
@@ -186,12 +194,20 @@ NAN_METHOD(PtyFork) {
   char **env = new char*[envc+1];
   env[envc] = NULL;
   for (; i < envc; i++) {
+#if NODE_MODULE_VERSION >= 72
+    String::Utf8Value pair(env_->Get(Nan::New<Integer>(i))->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+#else
     String::Utf8Value pair(env_->Get(Nan::New<Integer>(i))->ToString());
+#endif
     env[i] = strdup(*pair);
   }
 
   // cwd
+#if NODE_MODULE_VERSION >= 72
+  String::Utf8Value cwd_(info[3]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+#else
   String::Utf8Value cwd_(info[3]->ToString());
+#endif
   char *cwd = strdup(*cwd_);
 
   // size
