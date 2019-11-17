@@ -79,17 +79,17 @@ script:
   - |
     pushd fuzzy-native
       [[ -z "$ELECTRON" ]] && npm test
-      node-pre-gyp package testpackage
+      node-pre-gyp configure build package testpackage
     popd
   - |
     pushd keytar
       [[ -z "$ELECTRON" ]] && npm test
-      node-pre-gyp package testpackage
+      node-pre-gyp configure build package testpackage
     popd
   - |
     pushd pty
       [[ -z "$ELECTRON" ]] && npm test
-      node-pre-gyp package testpackage
+      node-pre-gyp configure build package testpackage
     popd
 
 git:
