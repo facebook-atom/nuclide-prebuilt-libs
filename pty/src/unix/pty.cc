@@ -450,7 +450,7 @@ NAN_METHOD(PtyGetProc) {
   }
 
 #if NODE_MODULE_VERSION >= 72
-  int fd = info[0]->IntegerValue(Nan::GetCurrentContext()).ToLocalChecked();
+  int fd = info[0]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
 #else
   int fd = info[0]->IntegerValue();
 #endif
