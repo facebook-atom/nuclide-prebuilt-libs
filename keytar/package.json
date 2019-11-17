@@ -45,7 +45,7 @@
     "node-abi": "^2.5.1",
     "node-cpplint": "~0.4.0",
     "node-gyp": "^3.8.0",
-    "node-pre-gyp": "0.12.0",
+    "node-pre-gyp": "0.14.0",
     "prebuild": "^8.0.1"
   },
   "dependencies": {
