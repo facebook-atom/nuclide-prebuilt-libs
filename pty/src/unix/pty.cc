@@ -213,8 +213,8 @@ NAN_METHOD(PtyFork) {
   // size
   struct winsize winp;
 #if NODE_MODULE_VERSION >= 72
-  winp.ws_col = info[4]->IntegerValue(Nan::GetCurrentContext()).ToLocalChecked();
-  winp.ws_row = info[5]->IntegerValue(Nan::GetCurrentContext()).ToLocalChecked();
+  winp.ws_col = info[4]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+  winp.ws_row = info[5]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
 #else
   winp.ws_col = info[4]->IntegerValue();
   winp.ws_row = info[5]->IntegerValue();
@@ -259,8 +259,8 @@ NAN_METHOD(PtyFork) {
 
   // uid / gid
 #if NODE_MODULE_VERSION >= 72
-  int uid = info[6]->IntegerValue(Nan::GetCurrentContext()).ToLocalChecked();
-  int gid = info[7]->IntegerValue(Nan::GetCurrentContext()).ToLocalChecked();
+  int uid = info[6]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+  int gid = info[7]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
 #else
   int uid = info[6]->IntegerValue();
   int gid = info[7]->IntegerValue();
@@ -355,8 +355,8 @@ NAN_METHOD(PtyOpen) {
   // size
   struct winsize winp;
 #if NODE_MODULE_VERSION >= 72
-  winp.ws_col = info[0]->IntegerValue(Nan::GetCurrentContext()).ToLocalChecked();
-  winp.ws_row = info[1]->IntegerValue(Nan::GetCurrentContext()).ToLocalChecked();
+  winp.ws_col = info[0]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+  winp.ws_row = info[1]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
 #else
   winp.ws_col = info[0]->IntegerValue();
   winp.ws_row = info[1]->IntegerValue();
@@ -411,15 +411,15 @@ NAN_METHOD(PtyResize) {
   }
 
 #if NODE_MODULE_VERSION >= 72
-  int fd = info[0]->IntegerValue(Nan::GetCurrentContext()).ToLocalChecked();
+  int fd = info[0]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
 #else
   int fd = info[0]->IntegerValue();
 #endif
 
   struct winsize winp;
 #if NODE_MODULE_VERSION >= 72
-  winp.ws_col = info[1]->IntegerValue(Nan::GetCurrentContext()).ToLocalChecked();
-  winp.ws_row = info[2]->IntegerValue(Nan::GetCurrentContext()).ToLocalChecked();
+  winp.ws_col = info[1]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+  winp.ws_row = info[2]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
 #else
   winp.ws_col = info[1]->IntegerValue();
   winp.ws_row = info[2]->IntegerValue();
