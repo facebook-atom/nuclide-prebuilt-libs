@@ -15,7 +15,7 @@ NAN_METHOD(SetPassword) {
     *v8::String::Utf8Value(info[0]),
     *v8::String::Utf8Value(info[1]),
     *v8::String::Utf8Value(info[2]),
-#endif    
+#endif
     new Nan::Callback(info[3].As<v8::Function>()));
   Nan::AsyncQueueWorker(worker);
 }
@@ -28,7 +28,7 @@ NAN_METHOD(GetPassword) {
 #else
     *v8::String::Utf8Value(info[0]),
     *v8::String::Utf8Value(info[1]),
-#endif    
+#endif
     new Nan::Callback(info[2].As<v8::Function>()));
   Nan::AsyncQueueWorker(worker);
 }
@@ -41,7 +41,7 @@ NAN_METHOD(DeletePassword) {
 #else
     *v8::String::Utf8Value(info[0]),
     *v8::String::Utf8Value(info[1]),
-#endif    
+#endif
     new Nan::Callback(info[2].As<v8::Function>()));
   Nan::AsyncQueueWorker(worker);
 }
@@ -52,7 +52,7 @@ NAN_METHOD(FindPassword) {
     *v8::String::Utf8Value(v8::Isolate::GetCurrent(), info[0]),
 #else
     *v8::String::Utf8Value(info[0]),
-#endif    
+#endif
     new Nan::Callback(info[1].As<v8::Function>()));
   Nan::AsyncQueueWorker(worker);
 }
@@ -63,7 +63,7 @@ NAN_METHOD(FindCredentials) {
     *v8::String::Utf8Value(v8::Isolate::GetCurrent(), info[0]),
 #else
     *v8::String::Utf8Value(info[0]),
-#endif    
+#endif
     new Nan::Callback(info[1].As<v8::Function>()));
   Nan::AsyncQueueWorker(worker);
 }
