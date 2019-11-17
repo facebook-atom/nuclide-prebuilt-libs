@@ -14,7 +14,6 @@ BINARY_HOST_MIRROR="https://github.com/facebooknuclide/nuclide-prebuilt-libs/rel
 
 TARGETS=(
   "--target_platform=linux --runtime=electron --target=1.7.0"
-  "--target_platform=linux --runtime=node --target=7.0.0"
   "--target_platform=linux --runtime=node --target=8.9.3"
   "--target_platform=linux --runtime=electron --target=3.0.13"
   "--target_platform=linux --runtime=electron --target=4.2.9"
@@ -23,7 +22,6 @@ TARGETS=(
   "--target_platform=linux --runtime=node --target=12.4.0"
 
   "--target_platform=darwin --runtime=electron --target=1.7.0"
-  "--target_platform=darwin --runtime=node --target=7.0.0"
   "--target_platform=darwin --runtime=node --target=8.9.3"
   "--target_platform=darwin --runtime=electron --target=3.0.13"
   "--target_platform=darwin --runtime=electron --target=4.2.9"
@@ -32,8 +30,6 @@ TARGETS=(
   "--target_platform=darwin --runtime=node --target=12.4.0"
 
   "--target_platform=win32 --runtime=electron --target=1.7.0"
-  "--target_platform=win32 --runtime=electron --target=2.0.5"
-  "--target_platform=win32 --runtime=node --target=7.0.0"
   "--target_platform=win32 --runtime=node --target=8.9.3"
   "--target_platform=win32 --runtime=electron --target=3.0.13"
   "--target_platform=win32 --runtime=electron --target=4.2.9"
