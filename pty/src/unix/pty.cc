@@ -164,7 +164,11 @@ NAN_METHOD(PtyFork) {
   signal(SIGINT, SIG_DFL);
 
   // file
+#if NODE_MODULE_VERSION >= 72
+  String::Utf8Value file(v8::Isolate::GetCurrent(), info[0]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+#else
   String::Utf8Value file(info[0]->ToString());
+#endif
 
   // args
   int i = 0;
@@ -175,7 +179,11 @@ NAN_METHOD(PtyFork) {
   argv[0] = strdup(*file);
   argv[argl-1] = NULL;
   for (; i < argc; i++) {
+#if NODE_MODULE_VERSION >= 72
+    String::Utf8Value arg(v8::Isolate::GetCurrent(), argv_->Get(Nan::New<Integer>(i))->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+#else
     String::Utf8Value arg(argv_->Get(Nan::New<Integer>(i))->ToString());
+#endif
     argv[i+1] = strdup(*arg);
   }
 
@@ -186,18 +194,31 @@ NAN_METHOD(PtyFork) {
   char **env = new char*[envc+1];
   env[envc] = NULL;
   for (; i < envc; i++) {
+#if NODE_MODULE_VERSION >= 72
+    String::Utf8Value pair(v8::Isolate::GetCurrent(), env_->Get(Nan::New<Integer>(i))->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+#else
     String::Utf8Value pair(env_->Get(Nan::New<Integer>(i))->ToString());
+#endif
     env[i] = strdup(*pair);
   }
 
   // cwd
+#if NODE_MODULE_VERSION >= 72
+  String::Utf8Value cwd_(v8::Isolate::GetCurrent(), info[3]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+#else
   String::Utf8Value cwd_(info[3]->ToString());
+#endif
   char *cwd = strdup(*cwd_);
 
   // size
   struct winsize winp;
+#if NODE_MODULE_VERSION >= 72
+  winp.ws_col = info[4]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+  winp.ws_row = info[5]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+#else
   winp.ws_col = info[4]->IntegerValue();
   winp.ws_row = info[5]->IntegerValue();
+#endif
   winp.ws_xpixel = 0;
   winp.ws_ypixel = 0;
 
@@ -237,8 +258,13 @@ NAN_METHOD(PtyFork) {
   cfsetspeed(term, B38400);
 
   // uid / gid
+#if NODE_MODULE_VERSION >= 72
+  int uid = info[6]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+  int gid = info[7]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+#else
   int uid = info[6]->IntegerValue();
   int gid = info[7]->IntegerValue();
+#endif
 
   // fork the pty
   int master = -1;
@@ -328,8 +354,13 @@ NAN_METHOD(PtyOpen) {
 
   // size
   struct winsize winp;
+#if NODE_MODULE_VERSION >= 72
+  winp.ws_col = info[0]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+  winp.ws_row = info[1]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+#else
   winp.ws_col = info[0]->IntegerValue();
   winp.ws_row = info[1]->IntegerValue();
+#endif
   winp.ws_xpixel = 0;
   winp.ws_ypixel = 0;
 
@@ -379,11 +410,20 @@ NAN_METHOD(PtyResize) {
     return Nan::ThrowError("Usage: pty.resize(fd, cols, rows)");
   }
 
+#if NODE_MODULE_VERSION >= 72
+  int fd = info[0]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+#else
   int fd = info[0]->IntegerValue();
+#endif
 
   struct winsize winp;
+#if NODE_MODULE_VERSION >= 72
+  winp.ws_col = info[1]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+  winp.ws_row = info[2]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+#else
   winp.ws_col = info[1]->IntegerValue();
   winp.ws_row = info[2]->IntegerValue();
+#endif
   winp.ws_xpixel = 0;
   winp.ws_ypixel = 0;
 
@@ -409,9 +449,17 @@ NAN_METHOD(PtyGetProc) {
     return Nan::ThrowError("Usage: pty.process(fd, tty)");
   }
 
+#if NODE_MODULE_VERSION >= 72
+  int fd = info[0]->IntegerValue(Nan::GetCurrentContext()).ToChecked();
+#else
   int fd = info[0]->IntegerValue();
+#endif
 
+#if NODE_MODULE_VERSION >= 72
+  String::Utf8Value tty_(v8::Isolate::GetCurrent(), info[1]->ToString(Nan::GetCurrentContext()).ToLocalChecked());
+#else
   String::Utf8Value tty_(info[1]->ToString());
+#endif
   char *tty = strdup(*tty_);
   char *name = pty_getproc(fd, tty);
   free(tty);
