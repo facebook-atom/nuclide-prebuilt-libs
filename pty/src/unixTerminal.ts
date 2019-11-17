@@ -1,6 +1,7 @@
 /**
  * Copyright (c) 2012-2015, Christopher Jeffrey (MIT License)
  * Copyright (c) 2016, Daniel Imms (MIT License).
+ * Copyright (c) 2018, Microsoft Corporation (MIT License).
  */
 
 import * as net from 'net';
@@ -263,10 +264,19 @@ export class UnixTerminal extends Terminal {
  */
 class PipeSocket extends net.Socket {
   constructor(fd: any) {
-    const tty = (<any>process).binding('tty_wrap');
-    const guessHandleType = tty.guessHandleType;
-    tty.guessHandleType = () => 'PIPE';
-    super({ fd });
-    tty.guessHandleType = guessHandleType;
+    if (parseInt(process.versions.modules) < 72) {
+      const tty = (<any>process).binding('tty_wrap');
+      const guessHandleType = tty.guessHandleType;
+      tty.guessHandleType = () => 'PIPE';
+      super({ fd });
+      tty.guessHandleType = guessHandleType;
+    } else {
+      // This code is take from here: https://github.com/microsoft/node-pty/blob/master/src/unixTerminal.ts
+      const { Pipe, constants } = (<any>process).binding('pipe_wrap'); // tslint:disable-line
+      // @types/node has fd as string? https://github.com/DefinitelyTyped/DefinitelyTyped/pull/18275
+      const handle = new Pipe(constants.SOCKET);
+      handle.open(fd);
+      super(<any>{ handle });
+    }
   }
 }
