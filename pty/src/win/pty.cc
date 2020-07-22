@@ -167,7 +167,9 @@ static NAN_METHOD(PtyStartProcess) {
     std::wstringstream envBlock;
 
     for(uint32_t i = 0; i < envValues->Length(); i++) {
-#if NODE_MODULE_VERSION >= 72
+#if NODE_MODULE_VERSION >= 75
+      std::wstring envValue(to_wstring(String::Utf8Value(v8::Isolate::GetCurrent(), envValues->Get(Nan::GetCurrentContext(), i).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked())));
+#elif NODE_MODULE_VERSION >= 72
       std::wstring envValue(to_wstring(String::Utf8Value(v8::Isolate::GetCurrent(), envValues->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked())));
 #else
       std::wstring envValue(to_wstring(String::Utf8Value(envValues->Get(i)->ToString())));
@@ -249,21 +251,38 @@ open:
   // Pty object values.
   Local<Object> marshal = Nan::New<Object>();
 
+#if NODE_MODULE_VERSION >= 75
+  marshal->Set(Nan::GetCurrentContext(), Nan::New<String>("innerPid").ToLocalChecked(), Nan::New<Number>((int)GetProcessId(handle)));
+  marshal->Set(Nan::GetCurrentContext(), Nan::New<String>("innerPidHandle").ToLocalChecked(), Nan::New<Number>((int)handle));
+  marshal->Set(Nan::GetCurrentContext(), Nan::New<String>("pid").ToLocalChecked(), Nan::New<Number>((int)winpty_agent_process(pc)));
+  marshal->Set(Nan::GetCurrentContext(), Nan::New<String>("pty").ToLocalChecked(), Nan::New<Number>(InterlockedIncrement(&ptyCounter)));
+  marshal->Set(Nan::GetCurrentContext(), Nan::New<String>("fd").ToLocalChecked(), Nan::New<Number>(-1));
+#else
   marshal->Set(Nan::New<String>("innerPid").ToLocalChecked(), Nan::New<Number>((int)GetProcessId(handle)));
   marshal->Set(Nan::New<String>("innerPidHandle").ToLocalChecked(), Nan::New<Number>((int)handle));
   marshal->Set(Nan::New<String>("pid").ToLocalChecked(), Nan::New<Number>((int)winpty_agent_process(pc)));
   marshal->Set(Nan::New<String>("pty").ToLocalChecked(), Nan::New<Number>(InterlockedIncrement(&ptyCounter)));
   marshal->Set(Nan::New<String>("fd").ToLocalChecked(), Nan::New<Number>(-1));
+#endif
 
   {
     LPCWSTR coninPipeName = winpty_conin_name(pc);
     std::wstring coninPipeNameWStr(coninPipeName);
     std::string coninPipeNameStr(coninPipeNameWStr.begin(), coninPipeNameWStr.end());
+#if NODE_MODULE_VERSION >= 75
+    marshal->Set(Nan::GetCurrentContext(), Nan::New<String>("conin").ToLocalChecked(), Nan::New<String>(coninPipeNameStr).ToLocalChecked());
+#else
     marshal->Set(Nan::New<String>("conin").ToLocalChecked(), Nan::New<String>(coninPipeNameStr).ToLocalChecked());
+#endif
+
     LPCWSTR conoutPipeName = winpty_conout_name(pc);
     std::wstring conoutPipeNameWStr(conoutPipeName);
     std::string conoutPipeNameStr(conoutPipeNameWStr.begin(), conoutPipeNameWStr.end());
+#if NODE_MODULE_VERSION >= 75
+    marshal->Set(Nan::GetCurrentContext(), Nan::New<String>("conout").ToLocalChecked(), Nan::New<String>(conoutPipeNameStr).ToLocalChecked());
+#else
     marshal->Set(Nan::New<String>("conout").ToLocalChecked(), Nan::New<String>(conoutPipeNameStr).ToLocalChecked());
+#endif
   }
 
   goto cleanup;
