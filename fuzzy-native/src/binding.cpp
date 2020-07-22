@@ -171,6 +171,8 @@ public:
       matcher->impl_.reserve(matcher->impl_.size() + arg1->Length());
       for (auto i: indexes) {
 #if NODE_MODULE_VERSION >= 72
+        matcher->impl_.addCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+#elif NODE_MODULE_VERSION >= 75
         matcher->impl_.addCandidate(to_std_string(arg1->Get(Nan::GetCurrentContext(), i)->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
 #else
         matcher->impl_.addCandidate(to_std_string(arg1->Get(i)->ToString()));
@@ -186,6 +188,8 @@ public:
       auto arg1 = v8::Local<v8::Array>::Cast(info[0]);
       for (size_t i = 0; i < arg1->Length(); i++) {
 #if NODE_MODULE_VERSION >= 72
+        matcher->impl_.removeCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+#elif NODE_MODULE_VERSION >= 75
         matcher->impl_.removeCandidate(to_std_string(arg1->Get(Nan::GetCurrentContext(), i)->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
 #else
         matcher->impl_.removeCandidate(to_std_string(arg1->Get(i)->ToString()));
