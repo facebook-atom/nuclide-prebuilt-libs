@@ -39,7 +39,7 @@ module.exports = function findBinary(packageJsonPath) {
       nodeAbi = 'electron-v6.0';
       break;
     case '75':
-      nodeAbi = 'electron-v7.0'
+      nodeAbi = 'electron-v7.3'
       break;
     case '57':
       // On Windows, we still need a custom build for Electron.
