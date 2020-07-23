@@ -86,7 +86,7 @@ public:
     SetPrototypeMethod(tpl, "setCandidates", SetCandidates);
 
     MatcherConstructor.Reset(tpl->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
-    exports->Set(Nan::New("Matcher").ToLocalChecked(), tpl->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
+    exports->Set(Nan::GetCurrentContext(), Nan::New("Matcher").ToLocalChecked(), tpl->GetFunction(Nan::GetCurrentContext()).ToLocalChecked());
   }
 
   static void Create(const Nan::FunctionCallbackInfo<v8::Value> &info) {
@@ -146,11 +146,11 @@ public:
       if (match.matchIndexes != nullptr) {
         auto array = New<v8::Array>(match.matchIndexes->size());
         for (size_t i = 0; i < array->Length(); i++) {
-          array->Set(i, New(match.matchIndexes->at(i)));
+          array->Set(Nan::GetCurrentContext(), i, New(match.matchIndexes->at(i)));
         }
         Set(obj, matchIndexesKey, array);
       }
-      result->Set(result_count++, obj);
+      result->Set(Nan::GetCurrentContext(), result_count++, obj);
     }
     info.GetReturnValue().Set(result);
   }
@@ -170,7 +170,9 @@ public:
       }
       matcher->impl_.reserve(matcher->impl_.size() + arg1->Length());
       for (auto i: indexes) {
-#if NODE_MODULE_VERSION >= 72
+#if NODE_MODULE_VERSION >= 75
+        matcher->impl_.addCandidate(to_std_string(arg1->Get(Nan::GetCurrentContext(), i).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+#elif NODE_MODULE_VERSION >= 72
         matcher->impl_.addCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
 #else
         matcher->impl_.addCandidate(to_std_string(arg1->Get(i)->ToString()));
@@ -185,7 +187,9 @@ public:
       CHECK(info[0]->IsArray(), "Expected an array of strings");
       auto arg1 = v8::Local<v8::Array>::Cast(info[0]);
       for (size_t i = 0; i < arg1->Length(); i++) {
-#if NODE_MODULE_VERSION >= 72
+#if NODE_MODULE_VERSION >= 75
+        matcher->impl_.removeCandidate(to_std_string(arg1->Get(Nan::GetCurrentContext(), i).ToLocalChecked()->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
+#elif NODE_MODULE_VERSION >= 72
         matcher->impl_.removeCandidate(to_std_string(arg1->Get(i)->ToString(Nan::GetCurrentContext()).ToLocalChecked()));
 #else
         matcher->impl_.removeCandidate(to_std_string(arg1->Get(i)->ToString()));

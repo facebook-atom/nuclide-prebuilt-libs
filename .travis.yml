@@ -26,6 +26,8 @@ matrix:
       env: NODE_VERSION="10.11.0" CXX="g++-7" ELECTRON="4.2.9"
     - os: linux   # abi 73 (vscode 1.39.1)
       env: NODE_VERSION="12.4.0" CXX="g++-7" ELECTRON="6.0.9"
+    - os: linux   # abi 75 (vscode 1.46)
+      env: NODE_VERSION="12.8.1" CXX="g++-7" ELECTRON="7.3.1"
     - os: linux   # abi 72
       env: NODE_VERSION="12.4.0" CXX="g++-7"
     # os x x86
@@ -41,6 +43,8 @@ matrix:
       env: NODE_VERSION="10.11.0" CXX="clang" ELECTRON="4.2.9"
     - os: osx   # abi 73 (vscode 1.39.1)
       env: NODE_VERSION="12.4.0" CXX="clang" ELECTRON="6.0.9"
+    - os: osx   # abi 75 (vscode 1.46)
+      env: NODE_VERSION="12.8.1" CXX="clang" ELECTRON="7.3.1"
     - os: osx   # abi 72
       env: NODE_VERSION="12.4.0" CXX="clang"
 

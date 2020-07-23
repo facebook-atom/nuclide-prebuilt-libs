@@ -20,6 +20,7 @@ TARGETS=(
   "--target_platform=linux --runtime=node --target=10.13.0"
   "--target_platform=linux --runtime=electron --target=6.0.9"
   "--target_platform=linux --runtime=node --target=12.4.0"
+  "--target_platform=linux --runtime=electron --target=7.3.1"
 
   "--target_platform=darwin --runtime=electron --target=1.7.0"
   "--target_platform=darwin --runtime=node --target=8.9.3"
@@ -28,6 +29,7 @@ TARGETS=(
   "--target_platform=darwin --runtime=node --target=10.13.0"
   "--target_platform=darwin --runtime=electron --target=6.0.9"
   "--target_platform=darwin --runtime=node --target=12.4.0"
+  "--target_platform=darwin --runtime=electron --target=7.3.1"
 
   "--target_platform=win32 --runtime=electron --target=1.7.0"
   "--target_platform=win32 --runtime=node --target=8.9.3"
@@ -36,6 +38,7 @@ TARGETS=(
   "--target_platform=win32 --runtime=node --target=10.13.0"
   "--target_platform=win32 --runtime=electron --target=6.0.9"
   "--target_platform=win32 --runtime=node --target=12.4.0"
+  "--target_platform=win32 --runtime=electron --target=7.3.1"
 )
 
 MODULE_NAMES=(

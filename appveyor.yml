@@ -16,6 +16,8 @@ environment:
     - nodejs_version: "12.4.0"
       ELECTRON: "6.0.9"
     - nodejs_version: "12.4.0"
+    - node_js_version: "12.8.1"
+      ELECTRON: "7.3.1"
 
 matrix:
   fast_finish: true

@@ -190,8 +190,13 @@ void FindCredentialsWorker::HandleOKCallback() {
         cred.second.data(),
         cred.second.length()).ToLocalChecked();
 
+#if NODE_MODULE_VERSION >= 75
+      obj->Set(Nan::GetCurrentContext(), Nan::New("account").ToLocalChecked(), account);
+      obj->Set(Nan::GetCurrentContext(), Nan::New("password").ToLocalChecked(), password);
+#else
       obj->Set(Nan::New("account").ToLocalChecked(), account);
       obj->Set(Nan::New("password").ToLocalChecked(), password);
+#endif 
 
       Nan::Set(val, idx, obj);
       ++idx;
